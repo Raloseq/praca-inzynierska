@@ -15,8 +15,14 @@
             </li>
             <li>
                 <a href="#" class="flex items-center py-5 px-4 text-lg font-normal hover:bg-indigo-400">
-                <svg class="w-10 fill-white mr-5" height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M37.84 12.02c-.41-1.18-1.53-2.02-2.84-2.02h-22c-1.31 0-2.43.84-2.84 2.02l-4.16 11.98v16c0 1.1.9 2 2 2h2c1.11 0 2-.9 2-2v-2h24v2c0 1.1.9 2 2 2h2c1.11 0 2-.9 2-2v-16l-4.16-11.98zm-24.84 19.98c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm22 0c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm-25-10l3-9h22l3 9h-28z"/><path d="M0 0h48v48h-48z" fill="none"/></svg>
+                <svg class="w-10 fill-white mr-5" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M37.84 12.02c-.41-1.18-1.53-2.02-2.84-2.02h-22c-1.31 0-2.43.84-2.84 2.02l-4.16 11.98v16c0 1.1.9 2 2 2h2c1.11 0 2-.9 2-2v-2h24v2c0 1.1.9 2 2 2h2c1.11 0 2-.9 2-2v-16l-4.16-11.98zm-24.84 19.98c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm22 0c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm-25-10l3-9h22l3 9h-28z"/><path d="M0 0h48v48h-48z" fill="none"/></svg>
                     Pojazdy
+                </a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center py-5 px-4 text-lg font-normal hover:bg-indigo-400">
+                <svg class="w-10 fill-white mr-5" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M5 22h14c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2h-2a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1H5c-1.103 0-2 .897-2 2v15c0 1.103.897 2 2 2zM5 5h2v2h10V5h2v15H5V5z"/><path d="m11 13.586-1.793-1.793-1.414 1.414L11 16.414l5.207-5.207-1.414-1.414z"/></svg>
+                    Zlecenia
                 </a>
             </li>
             <li>
