@@ -13,6 +13,9 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            backgroundImage: {
+                'hero-pattern': "url('./storage/app/images/front-page.jpg')",
+            },
         },
     },
 
