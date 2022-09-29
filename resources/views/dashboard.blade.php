@@ -9,7 +9,7 @@
         <div class="flex h-full">
             @include('components.sidebar')
             <div class="w-4/5 h-full">
-                Main
+                @yield('content')
             </div>
         </div>
     </div>
