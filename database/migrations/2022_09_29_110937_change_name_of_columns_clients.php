@@ -18,7 +18,6 @@ return new class extends Migration
             $table->renameColumn('nazwisko','surname');
             $table->renameColumn('nazwa_firmy','company_name');
             $table->renameColumn('nr_telefonu','phone');
-            $table->renameColumn('id_adres_klienta','id_client_address');
         });
     }
 
@@ -34,7 +33,6 @@ return new class extends Migration
             $table->renameColumn('surname','nazwisko');
             $table->renameColumn('company_name','nazwa_firmy');
             $table->renameColumn('phone','nr_telefonu');
-            $table->renameColumn('id_client_address','id_adres_klienta');
         });
     }
 };

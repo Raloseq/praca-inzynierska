@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ClientAddress;
 use Illuminate\Http\Request;
+use App\Models\Clients;
 
 class ClientAddressController extends Controller
 {
@@ -24,7 +25,9 @@ class ClientAddressController extends Controller
      */
     public function create()
     {
-        //
+        return view('client_address.create', [
+            'client_id' => app('request')->input('client_id')
+        ]);
     }
 
     /**
@@ -35,7 +38,11 @@ class ClientAddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $client_id = $request->client_id;
+        $client_address = new ClientAddress($request->all());
+        $client_address ->save();
+
+        return redirect()->route('clients.show', $client_id)->with('status','Adres klient został pomyślnie dodany!');
     }
 
     /**
@@ -57,7 +64,9 @@ class ClientAddressController extends Controller
      */
     public function edit(ClientAddress $clientAddress)
     {
-        //
+        return view('client_address.edit', [
+            'client_address' => $clientAddress
+        ]);
     }
 
     /**
@@ -69,7 +78,11 @@ class ClientAddressController extends Controller
      */
     public function update(Request $request, ClientAddress $clientAddress)
     {
-        //
+        $client = Clients::find($clientAddress->client_id);
+        $clientAddress->fill($request->all());
+        $clientAddress->save();
+        
+        return redirect()->route('clients.show',$client)->with('status','Dane adresu klienta zostały zaktualizowane!');
     }
 
     /**
@@ -80,6 +93,7 @@ class ClientAddressController extends Controller
      */
     public function destroy(ClientAddress $clientAddress)
     {
-        //
+        $clientAddress->delete();
+        return redirect()->back()->with('status','Adres klienta został pomyślnie usunięty!');
     }
 }

@@ -6,7 +6,7 @@
     @method('PUT')
     <div>
         <x-input-label for="name" :value="__('Imie')" />
-        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" value="{{$client->name}}" autofocus />
+        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" value="{{$client->name}}" autofocus/>
         <x-input-error :messages="$errors->get('name')" class="mt-2" />
     </div>
 

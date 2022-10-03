@@ -26,10 +26,10 @@ class StoreClientRequest extends FormRequest
         return [
             'name' => 'required|string|max:30',
             'surname' => 'required|string|max:30',
-            'phone' => 'required|string|digits:9|numeric',
-            'email' => 'required|email:rfc,dns',
-            'NIP' => 'nullable|string|digits:10|numeric',
-            'comapny_name' => 'nullable|string|max:30'
+            'phone' => 'required|string|digits:9|numeric|unique:clients',
+            'email' => 'required|email:rfc,dns|unique:clients',
+            'NIP' => 'nullable|string|digits:10|numeric|unique:clients',
+            'comapny_name' => 'nullable|string|max:30|unique:clients'
         ];
     }
 

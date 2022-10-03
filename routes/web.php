@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\ClientAddressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('clients', ClientsController::class);
+    Route::resource('client_address', ClientAddressController::class);
 });
 
 

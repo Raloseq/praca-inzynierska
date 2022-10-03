@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Clients;
+use App\Models\ClientAddress;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreClientRequest;
 
@@ -50,9 +51,12 @@ class ClientsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Clients $client)
-    {
+    {   
+        $client_id = $client->id;
+        $address = Clients::find($client_id)->client_address;
         return view('clients.show', [
-            'client' => $client
+            'client' => $client,
+            'address' => $address
         ]);
     }
 
@@ -81,7 +85,7 @@ class ClientsController extends Controller
         $client->fill($request->validated());
         $client->save();
 
-        return redirect()->route('clients.index')->with('status','Dane klienta zostały zaktualizowane!');;
+        return redirect()->route('clients.index')->with('status','Dane klienta zostały zaktualizowane!');
     }
 
     /**

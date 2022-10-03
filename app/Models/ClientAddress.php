@@ -9,11 +9,14 @@ class ClientAddress extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = "id_adres_klienta";
-
     public $incrementing = false;
 
     protected $fillable = [
-        'wojewodztwo', 'miasto', 'ulica', 'kod_pocztowy'
+        'voivodeship', 'city', 'street', 'ZIP', 'client_id'
     ];
+
+    public function clients()
+    {
+        return $this->belongsTo(Clients::class, 'client_id', 'id');
+    }
 }

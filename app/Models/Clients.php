@@ -15,8 +15,8 @@ class Clients extends Model
         'name', 'surname', 'phone', 'email', 'NIP', 'company_name'
     ];
 
-    public function addresses()
+    public function client_address()
     {
-        return $this->hasMany(ClientAddress::class);
+        return $this->hasMany(ClientAddress::class, 'client_id', 'id');
     }
 }
