@@ -16,7 +16,7 @@ class ClientsController extends Controller
     public function index()
     {
         return view('clients.index', [
-            'clients' => Clients::paginate(10)
+            'clients' => Clients::paginate(5)
         ]);
     }
 
@@ -40,7 +40,7 @@ class ClientsController extends Controller
     {
         $client = new Clients($request->validated());
         $client->save();
-        return redirect()->route('clients.index');
+        return redirect()->route('clients.index')->with('status','Klient został pomyślnie dodany!');
     }
 
     /**
@@ -81,7 +81,7 @@ class ClientsController extends Controller
         $client->fill($request->validated());
         $client->save();
 
-        return redirect()->route('clients.index');
+        return redirect()->route('clients.index')->with('status','Dane klienta zostały zaktualizowane!');;
     }
 
     /**
@@ -93,6 +93,6 @@ class ClientsController extends Controller
     public function destroy(Clients $client)
     {
         $client->delete();
-        return redirect()->route('clients.index');
+        return redirect()->route('clients.index')->with('status','Klient został pomyślnie usunięty!');
     }
 }
