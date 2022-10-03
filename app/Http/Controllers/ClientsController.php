@@ -49,9 +49,11 @@ class ClientsController extends Controller
      * @param  \App\Models\Clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function show(Clients $clients)
+    public function show(Clients $client)
     {
-        //
+        return view('clients.show', [
+            'client' => $client
+        ]);
     }
 
     /**
@@ -60,9 +62,11 @@ class ClientsController extends Controller
      * @param  \App\Models\Clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function edit(Clients $clients)
+    public function edit(Clients $client)
     {
-        //
+        return view('clients.edit', [
+            'client' => $client
+        ]);
     }
 
     /**
@@ -72,9 +76,12 @@ class ClientsController extends Controller
      * @param  \App\Models\Clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Clients $clients)
+    public function update(StoreClientRequest $request, Clients $client)
     {
-        //
+        $client->fill($request->validated());
+        $client->save();
+
+        return redirect()->route('clients.index');
     }
 
     /**
@@ -83,8 +90,9 @@ class ClientsController extends Controller
      * @param  \App\Models\Clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Clients $clients)
+    public function destroy(Clients $client)
     {
-        //
+        $client->delete();
+        return redirect()->route('clients.index');
     }
 }
