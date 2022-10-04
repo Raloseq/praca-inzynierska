@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreClientRequest extends FormRequest
+class EmployeeStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,17 +27,8 @@ class StoreClientRequest extends FormRequest
         return [
             'name' => 'required|string|max:30',
             'surname' => 'required|string|max:30',
-            'phone' => 'required|string|numeric|unique:clients|digits:9',
-            'email' => 'required|unique:clients|email',
-            'NIP' => 'nullable|string|digits:10|unique:clients|numeric',
-            'comapny_name' => 'nullable|string|unique:clients|max:30'
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'phone.numeric' => 'Telefon powinien zawierać tylko cyfry'
+            'phone' => 'required|string|digits:9|unique:employee|numeric',
+            'salary' => 'required|min:2000|numeric',
         ];
     }
 }
