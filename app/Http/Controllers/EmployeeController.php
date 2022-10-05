@@ -6,6 +6,7 @@ use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Requests\EmployeeStoreRequest;
 use App\Http\Requests\EmployeeUpdateRequest;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
@@ -16,8 +17,10 @@ class EmployeeController extends Controller
      */
     public function index()
     {
+        $employees = Employee::where('user_id', Auth::id())->paginate(5);
+
         return view('employee.index', [
-            'employees' => Employee::paginate(5)
+            'employees' => $employees
         ]);
     }
 
@@ -40,6 +43,7 @@ class EmployeeController extends Controller
     public function store(EmployeeStoreRequest $request)
     {
         $employee = new Employee($request->validated());
+        $employee->user_id = Auth::id();
         $employee->save();
         return redirect()->route('employee.index')->with('status','Pracownik został pomyślnie dodany!');
     }

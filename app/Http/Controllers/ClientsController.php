@@ -6,6 +6,7 @@ use App\Models\Clients;
 use App\Models\ClientAddress;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreClientRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ClientsController extends Controller
 {
@@ -16,8 +17,10 @@ class ClientsController extends Controller
      */
     public function index()
     {
+        $clients = Clients::where('user_id', Auth::id())->paginate(5);
+
         return view('clients.index', [
-            'clients' => Clients::paginate(5)
+            'clients' => $clients
         ]);
     }
 
@@ -40,6 +43,7 @@ class ClientsController extends Controller
     public function store(StoreClientRequest $request)
     {
         $client = new Clients($request->validated());
+        $client->user_id = Auth::id();
         $client->save();
         return redirect()->route('clients.index')->with('status','Klient został pomyślnie dodany!');
     }

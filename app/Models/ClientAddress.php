@@ -11,6 +11,8 @@ class ClientAddress extends Model
 
     public $incrementing = false;
 
+    protected $table = 'client_addresses';
+
     protected $fillable = [
         'voivodeship', 'city', 'street', 'ZIP', 'client_id'
     ];

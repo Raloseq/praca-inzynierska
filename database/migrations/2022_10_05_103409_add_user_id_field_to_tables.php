@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::table('employee', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id');
+        });
         Schema::table('clients', function (Blueprint $table) {
-            $table->string('imie', 30)->default('')->change();
-            $table->string('nazwisko', 30)->default('')->change();
-            $table->string('nr_telefonu',9)->default('')->change();
-            $table->string('email',50)->default('')->change();
+            $table->unsignedBigInteger('user_id');
         });
     }
 
@@ -28,11 +28,11 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('employee', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+        });
         Schema::table('clients', function (Blueprint $table) {
-            $table->string('imie', 30);
-            $table->string('nazwisko', 30);
-            $table->string('nr_telefonu',9);
-            $table->string('email',30);
+            $table->dropColumn('user_id');
         });
     }
 };

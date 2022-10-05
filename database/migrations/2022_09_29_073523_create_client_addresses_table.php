@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('wojewodztwo',30);
             $table->string('miasto',50);
             $table->string('ulica',50);
-            $table->string('kod_pocztowy',5);
+            $table->string('kod_pocztowy',6);
         });
     }
 
