@@ -5,6 +5,7 @@ use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ClientAddressController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\ServiceOrdersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('client_address', ClientAddressController::class);
     Route::resource('employee', EmployeeController::class);
     Route::resource('cars', CarController::class);
+    Route::resource('service_orders', ServiceOrdersController::class);
 });
 
 

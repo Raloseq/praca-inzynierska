@@ -24,4 +24,9 @@ class Car extends Model
     {
         return $this->belongsTo(CarModel::class);
     }
+
+    public function service_oders()
+    {
+        return $this->hasMany(ServiceOrders::class, 'car_id', 'id');
+    }
 }

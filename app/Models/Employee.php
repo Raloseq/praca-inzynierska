@@ -14,4 +14,9 @@ class Employee extends Model
     protected $fillable = [
         'name', 'surname', 'phone','position','salary'
     ];
+
+    public function service_oders()
+    {
+        return $this->hasMany(ServiceOrders::class, 'employee_id', 'id');
+    }
 }

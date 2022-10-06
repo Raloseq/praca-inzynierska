@@ -29,7 +29,7 @@
 
     <div class="mt-4">
         <x-input-label for="position" :value="__('Stanowisko')" />
-        <x-text-input id="position" class="block mt-1 w-full" type="number" name="position" :value="old('position')" autofocus />
+        <x-text-input id="position" class="block mt-1 w-full" type="text" name="position" :value="old('position')" autofocus />
         <x-input-error :messages="$errors->get('position')" class="mt-2" />
     </div>
 

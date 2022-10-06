@@ -19,4 +19,9 @@ class Clients extends Model
     {
         return $this->hasMany(ClientAddress::class, 'client_id', 'id');
     }
+
+    public function service_oders()
+    {
+        return $this->hasMany(ServiceOrders::class, 'client_id', 'id');
+    }
 }
