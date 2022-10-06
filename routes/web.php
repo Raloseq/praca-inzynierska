@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ClientAddressController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\CarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('clients', ClientsController::class);
     Route::resource('client_address', ClientAddressController::class);
     Route::resource('employee', EmployeeController::class);
+    Route::resource('cars', CarController::class);
 });
 
 

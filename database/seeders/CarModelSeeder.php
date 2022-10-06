@@ -17,11 +17,11 @@ class CarModelSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
 
-        DB::table('model')->insert([
-            ['name' => 'samochód'],
-            ['name' => 'motocykl'],
-            ['name' => 'koparka'],
-            ['name' => 'dostawczak'],
-        ]);
+        for($i = 0; $i < 20; $i++) {
+            DB::table('model')->insert([
+                'name' => $faker->text(6),
+                'brand_id' => $faker->numberBetween(1,15),
+            ]);
+        }
     }
 }

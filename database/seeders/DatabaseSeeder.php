@@ -25,9 +25,11 @@ class DatabaseSeeder extends Seeder
             EmployeeSeeder::class,
             TypeSeeder::class,
             BrandSeeder::class,
+            CarModelSeeder::class,
             // UserSeeder::class,
             ClientSeeder::class,
-            ClientAddressSeeder::class
+            ClientAddressSeeder::class,
+            CarsSeeder::class
         ]);
     }
 }
