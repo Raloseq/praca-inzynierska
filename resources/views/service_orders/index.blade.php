@@ -20,13 +20,13 @@
                     Lp.
                 </th>
                 <th scope="col" class="py-3 px-6">
-                    Imię
+                    Klient
                 </th>
                 <th scope="col" class="py-3 px-6">
-                    Nazwisko
+                    Opis
                 </th>
                 <th scope="col" class="py-3 px-6">
-                    Nr. Telefonu
+                    Status
                 </th>
                 <th scope="col" class="py-3 px-6">
                     Action
@@ -43,10 +43,10 @@
                     {{$order->client_id}}
                 </th>
                 <td class="py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white">
-                    {{$order->admission_date}}
+                    {{$order->description}}
                 </td>
                 <td class="py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white">
-                    {{$order->price}}
+                    {{$order->is_done}}
                 </td>
                 <td class="py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white flex">
                     <a href="{{ route('service_orders.edit', $order) }}" class="font-medium text-yellow-500 dark:text-blue-500 hover:underline">

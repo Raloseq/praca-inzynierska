@@ -20,7 +20,7 @@ class Clients extends Model
         return $this->hasMany(ClientAddress::class, 'client_id', 'id');
     }
 
-    public function service_oders()
+    public function service_orders()
     {
         return $this->hasMany(ServiceOrders::class, 'client_id', 'id');
     }
