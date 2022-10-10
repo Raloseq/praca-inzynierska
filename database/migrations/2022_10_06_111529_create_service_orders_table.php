@@ -17,8 +17,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->date('admission_date');
-            $table->date('end_date_pred')->nullable();
-            $table->date('end_date');
+            $table->date('end_date')->nullable();
             $table->boolean('is_done')->default(0);
             $table->string('description',255);
             $table->decimal('price');

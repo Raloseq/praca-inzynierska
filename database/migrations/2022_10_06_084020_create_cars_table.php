@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('VIN',17);
             $table->string('registration_number',6);
             $table->date('year');
-            $table->string('photo',200);
+            $table->string('photo',200)->nullable();
             $table->string('type', 20);
             $table->string('model', 20);
             $table->string('brand', 20);

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name',30);
             $table->string('surname',30);
             $table->string('phone');
-            $table->string('position',20);
+            $table->string('position',20)->nullable();
             $table->decimal('salary');
         });
     }
