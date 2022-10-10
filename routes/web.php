@@ -6,7 +6,7 @@ use App\Http\Controllers\ClientAddressController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ServiceOrdersController;
-
+use App\Http\Controllers\OrdersTimetableController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +32,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('employee', EmployeeController::class);
     Route::resource('cars', CarController::class);
     Route::resource('service_orders', ServiceOrdersController::class);
+
+    Route::get('fullcalendar', [OrdersTimetableController::class, 'index']);
+    Route::post('fullcalendar-ajax', [OrdersTimetableController::class, 'calendarOrders']);
 });
 
 

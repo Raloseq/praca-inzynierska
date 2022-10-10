@@ -5,19 +5,13 @@
 
     <div class="mt-4">
         <x-input-label for="admission_date" :value="__('Data przyjęcia')" />
-        <x-text-input id="admission_date" class="block mt-1 w-full" type="date" name="admission_date" :value="old('admission_date')" required autofocus />
+        <x-text-input id="admission_date" class="block mt-1 w-full" type="datetime-local" name="admission_date" :value="old('admission_date')" required autofocus />
         <x-input-error :messages="$errors->get('admission_date')" class="mt-2" />
     </div>
 
     <div class="mt-4">
-        <x-input-label for="end_date_pref" :value="__('Szacowana data oddania')" />
-        <x-text-input id="end_date_pref" class="block mt-1 w-full" type="date" name="end_date_pref" :value="old('end_date_pref')" autofocus />
-        <x-input-error :messages="$errors->get('end_date_pref')" class="mt-2" />
-    </div>
-
-    <div class="mt-4">
         <x-input-label for="end_date" :value="__('Data oddania')" />
-        <x-text-input id="end_date" class="block mt-1 w-full" type="date" name="end_date" :value="old('end_date')" autofocus />
+        <x-text-input id="end_date" class="block mt-1 w-full" type="datetime-local" name="end_date" :value="old('end_date')" autofocus />
         <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
     </div>
 

@@ -5,19 +5,17 @@
     @method('PUT')
     <div class="mt-4">
         <x-input-label for="admission_date" :value="__('Data przyjęcia')" />
-        <x-text-input id="admission_date" class="block mt-1 w-full" type="date" name="admission_date" value="{{$order->admission_date}}" required autofocus />
+        <x-text-input id="admission_date" class="block mt-1 w-full" type="datetime-local" name="admission_date" value="{{$order->admission_date}}" required autofocus />
         <x-input-error :messages="$errors->get('admission_date')" class="mt-2" />
     </div>
 
-    <div class="mt-4">
-        <x-input-label for="end_date_pred" :value="__('Szacowana data oddania')" />
-        <x-text-input id="end_date_pred" class="block mt-1 w-full" type="date" name="end_date_pred" value="{{$order->end_date_pred}}" autofocus />
-        <x-input-error :messages="$errors->get('end_date_pred')" class="mt-2" />
-    </div>
+
+    <x-text-input id="order_calendar" class="block mt-1 w-full" name="order_calendar" value="{{$order_calendar->id}}" type="number" required autofocus />
+
 
     <div class="mt-4">
         <x-input-label for="end_date" :value="__('Data oddania')" />
-        <x-text-input id="end_date" class="block mt-1 w-full" type="date" name="end_date" value="{{$order->end_date}}" autofocus />
+        <x-text-input id="end_date" class="block mt-1 w-full" type="datetime-local" name="end_date" value="{{$order->end_date}}" autofocus />
         <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
     </div>
 

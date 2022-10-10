@@ -6,6 +6,7 @@ use App\Models\ServiceOrders;
 use App\Models\Clients;
 use App\Models\Employee;
 use App\Models\Car;
+use App\Models\OrdersTimetable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ServiceOrderStoreRequest;
@@ -53,6 +54,14 @@ class ServiceOrdersController extends Controller
     public function store(ServiceOrderStoreRequest $request)
     {
         $service_order = new ServiceOrders($request->validated());
+
+        $event = OrdersTimetable::create([
+            'title' => $request->description,
+            'start' => $request->admission_date,
+            'end' => $request->end_date,
+            'user_id' => Auth::id()
+        ]);
+
         $service_order->user_id = Auth::id();
         $service_order->save();
         return redirect()->route('service_orders.index')->with('status','Zlecenie zostało pomyślnie dodane!');
@@ -83,15 +92,20 @@ class ServiceOrdersController extends Controller
         $cars = Car::where('user_id', Auth::id())->get();
         $employees = Employee::where('user_id', Auth::id())->get();
 
-        // $client = Clients::where('id',$serviceOrder->client_id)->get();
-        // $car = Car::where('id',$serviceOrder->car_id)->get();
-        // $employee = Employee::where('id',$serviceOrder->employee_id)->get();
+        $orders = OrdersTimetable::where('user_id', Auth::id())->get();
+
+        foreach($orders as $order) {
+            if($order->end_date === $serviceOrder->end_date) {
+                $order_calendar = $order;
+            }
+        }
 
         return view('service_orders.edit', [
             'order' => $serviceOrder,
             'clients' => $clients,
             'employees' => $employees,
-            'cars' => $cars
+            'cars' => $cars,
+            'order_calendar' => $order_calendar
         ]);
     }
 
@@ -107,6 +121,12 @@ class ServiceOrdersController extends Controller
         $serviceOrder->fill($request->validated());
         $serviceOrder->save();
 
+        $order = OrdersTimetable::find($request->order_calendar)->update([
+            'title' => $request->description,
+            'start' => $request->admission_date,
+            'end' => $request->end_date,
+        ]);
+
         return redirect()->route('service_orders.index')->with('status','Dane zlecenia zostały zaktualizowane!');
     }
 
@@ -118,7 +138,18 @@ class ServiceOrdersController extends Controller
      */
     public function destroy(ServiceOrders $serviceOrder)
     {
+        $orders = OrdersTimetable::where('user_id', Auth::id())->get();
+
+        foreach($orders as $order) {
+            if($order->end_date === $serviceOrder->end_date) {
+                $order_calendar = $order;
+            }
+        }
+
+        OrdersTimetable::find($order_calendar->id)->delete();
+        
         $serviceOrder->delete();
+        
         return redirect()->route('service_orders.index')->with('status','Zlecenie zostało pomyślnie usunięte!');
     }
 }
