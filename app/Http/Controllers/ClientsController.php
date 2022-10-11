@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Clients;
 use App\Models\ClientAddress;
+use App\Models\ServiceOrders;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreClientRequest;
 use Illuminate\Support\Facades\Auth;
@@ -58,9 +59,20 @@ class ClientsController extends Controller
     {   
         $client_id = $client->id;
         $address = Clients::find($client_id)->client_address;
+
+        $orders = ServiceOrders::with('clients')->get();
+        $doneOrders = [];
+
+        foreach($orders as $order) {
+            if($order->is_done === 1) {
+                $doneOrders[] = $order;
+            }
+        }
+
         return view('clients.show', [
             'client' => $client,
-            'address' => $address
+            'address' => $address,
+            'doneOrders' => $orders
         ]);
     }
 
