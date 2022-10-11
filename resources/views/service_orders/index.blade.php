@@ -46,7 +46,11 @@
                     {{$order->description}}
                 </td>
                 <td class="py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white">
-                    {{$order->is_done}}
+                    @if($order->is_done === 1)
+                        Zakonczony
+                    @else
+                        W trakcie
+                    @endif
                 </td>
                 <td class="py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white flex">
                     <a href="{{ route('service_orders.edit', $order) }}" class="font-medium text-yellow-500 dark:text-blue-500 hover:underline">

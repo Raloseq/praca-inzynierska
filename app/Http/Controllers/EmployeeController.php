@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\EmployeeStoreRequest;
 use App\Http\Requests\EmployeeUpdateRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Models\ServiceOrders;
 
 class EmployeeController extends Controller
 {
@@ -56,8 +57,18 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
+        $orders = ServiceOrders::with('employees')->get();
+        $doneOrders = [];
+
+        foreach($orders as $order) {
+            if($order->is_done === 1) {
+                $doneOrders[] = $order;
+            }
+        }
+
         return view('employee.show', [
             'employee' => $employee,
+            'doneOrders' => $doneOrders
         ]);
     }
 

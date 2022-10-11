@@ -117,8 +117,16 @@ class ServiceOrdersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(ServiceOrderStoreRequest $request, ServiceOrders $serviceOrder)
-    {
-        $serviceOrder->fill($request->validated());
+    {   
+        $data = $request->validated();
+
+        if($request->is_done === 'on') {
+            $data['is_done'] = 1;
+        } else {
+            $data['is_done'] = 0;
+        }
+
+        $serviceOrder->fill($data);
         $serviceOrder->save();
 
         $order = OrdersTimetable::find($request->order_calendar)->update([
@@ -138,6 +146,15 @@ class ServiceOrdersController extends Controller
      */
     public function destroy(ServiceOrders $serviceOrder)
     {
+        $this->deleteOrderTimetable($serviceOrder);
+        $serviceOrder->delete();
+        
+        return redirect()->route('service_orders.index')->with('status','Zlecenie zostało pomyślnie usunięte!');
+    }
+
+
+    public function deleteOrderTimetable(ServiceOrders $serviceOrder)
+    {
         $orders = OrdersTimetable::where('user_id', Auth::id())->get();
 
         foreach($orders as $order) {
@@ -147,9 +164,5 @@ class ServiceOrdersController extends Controller
         }
 
         OrdersTimetable::find($order_calendar->id)->delete();
-        
-        $serviceOrder->delete();
-        
-        return redirect()->route('service_orders.index')->with('status','Zlecenie zostało pomyślnie usunięte!');
     }
 }

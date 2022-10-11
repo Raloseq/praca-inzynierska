@@ -18,7 +18,7 @@ class ServiceOrders extends Model
         'admission_date' , 
         'end_date_pred', 
         'end_date', 
-        'is_active', 
+        'is_done', 
         'description', 
         'price',
         'damage_photo'
@@ -31,7 +31,7 @@ class ServiceOrders extends Model
 
     public function employees()
     {
-        return $this->belongsTo(Emploeye::class, 'employee_id', 'id');
+        return $this->belongsTo(Employee::class, 'employee_id', 'id');
     }
 
     public function clients()

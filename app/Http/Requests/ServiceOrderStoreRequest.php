@@ -30,8 +30,7 @@ class ServiceOrderStoreRequest extends FormRequest
             'price' => 'numeric',
             'car_id' => 'required',
             'employee_id' => 'required',
-            'client_id' => 'required'  
-
+            'client_id' => 'required'
         ];
     }
 }
