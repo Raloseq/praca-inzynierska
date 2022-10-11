@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\CarModel;
+use App\Models\ServiceOrders;
 use App\Models\Type;
 use App\Models\Brand;
 use Illuminate\Http\Request;
@@ -70,8 +71,19 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
+
+        $orders = ServiceOrders::with('cars')->get();
+        $doneOrders = [];
+
+        foreach($orders as $order) {
+            if($order->is_done === 1) {
+                $doneOrders[] = $order;
+            }
+        }
+
         return view('cars.show', [
             'car' => $car,
+            'doneOrders' => $orders
         ]);
     }
 
