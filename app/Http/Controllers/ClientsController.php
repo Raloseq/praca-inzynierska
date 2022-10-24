@@ -64,7 +64,7 @@ class ClientsController extends Controller
         $doneOrders = [];
 
         foreach($orders as $order) {
-            if($order->is_done === 1) {
+            if(($order->is_done === 1) && ($client->id === $order->client_id)) {
                 $doneOrders[] = $order;
             }
         }
@@ -72,7 +72,7 @@ class ClientsController extends Controller
         return view('clients.show', [
             'client' => $client,
             'address' => $address,
-            'doneOrders' => $orders
+            'doneOrders' => $doneOrders
         ]);
     }
 

@@ -61,7 +61,7 @@ class EmployeeController extends Controller
         $doneOrders = [];
 
         foreach($orders as $order) {
-            if($order->is_done === 1) {
+            if(($order->is_done === 1) && ($employee->id === $order->employee_id)) {
                 $doneOrders[] = $order;
             }
         }

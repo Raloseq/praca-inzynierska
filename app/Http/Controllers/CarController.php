@@ -76,14 +76,14 @@ class CarController extends Controller
         $doneOrders = [];
 
         foreach($orders as $order) {
-            if($order->is_done === 1) {
+            if(($order->is_done === 1) && ($car->id === $order->car_id)) {
                 $doneOrders[] = $order;
             }
         }
 
         return view('cars.show', [
             'car' => $car,
-            'doneOrders' => $orders
+            'doneOrders' => $doneOrders
         ]);
     }
 
