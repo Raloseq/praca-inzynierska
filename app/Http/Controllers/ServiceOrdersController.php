@@ -54,7 +54,7 @@ class ServiceOrdersController extends Controller
     public function store(ServiceOrderStoreRequest $request)
     {
         $service_order = new ServiceOrders($request->validated());
-
+        $service_order->damage_photo = $request->file('damage_photo')->store('service_orders');
         $event = OrdersTimetable::create([
             'title' => $request->description,
             'start' => $request->admission_date,
@@ -124,6 +124,10 @@ class ServiceOrdersController extends Controller
             $data['is_done'] = 1;
         } else {
             $data['is_done'] = 0;
+        }
+
+        if($request->hasFile('damage_photo')) {
+            $serviceOrder->damage_photo = $request->file('damage_photo')->store('service_orders');
         }
 
         $serviceOrder->fill($data);

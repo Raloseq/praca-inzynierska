@@ -1,9 +1,21 @@
 @extends('dashboard')
 @section('content')
-<h1 class="m-10 font">Szczegółowe informacje na temat samochodu {{$car->VIN}}</h1>
 @include('components.status-messages')
 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+            <th scope="col" class="py-3 px-6">
+            Szczegółowe informacje na temat samochodu {{$car->VIN}}
+            </th>
+            <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                @if(!is_null($car->photo))
+                    <img src="{{ asset('storage/' . $car->photo) }}" alt="">
+                @else
+                
+                <img src="https://via.placeholder.com/150" alt="">
+                @endif
+            </td>
+        </tr>
         <tr>
             <th scope="col" class="py-3 px-6">
                 VIN

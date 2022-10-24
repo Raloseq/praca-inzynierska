@@ -1,6 +1,6 @@
 @extends('dashboard')
 @section('content')
-<form action="{{ route('service_orders.update', $order) }}" class="p-5" method="POST">
+<form action="{{ route('service_orders.update', $order) }}" class="p-5" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="mt-4">

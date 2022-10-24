@@ -1,6 +1,6 @@
 @extends('dashboard')
 @section('content')
-<form method="POST" action="{{ route('service_orders.store') }}" class="p-5">
+<form method="POST" action="{{ route('service_orders.store') }}" class="p-5" enctype="multipart/form-data">
     @csrf
 
     <div class="mt-4">

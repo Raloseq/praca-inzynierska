@@ -8,6 +8,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\ServiceOrdersController;
 use App\Http\Controllers\OrdersTimetableController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

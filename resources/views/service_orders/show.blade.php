@@ -68,6 +68,19 @@
                 <a href="{{ url('cars/'.$order->car_id.'' )}}">Dane pojazdu</a>
             </td>
         </tr>
+        <tr>
+            <th scope="col" class="py-3 px-6">
+                Zdjęcie usterki
+            </th>
+            <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                @if(!is_null($order->damage_photo))
+                    <img src="{{ asset('storage/' . $order->damage_photo) }}" alt="">
+                @else
+                
+                <img src="https://via.placeholder.com/150" alt="">
+                @endif
+            </td>
+        </tr>
     </thead>
 </table>
 <div class="flex justify-between items-center my-5">

@@ -117,6 +117,9 @@ class CarController extends Controller
     public function update(CarStoreRequest $request, Car $car)
     {
         $car->fill($request->validated());
+        if($request->hasFile('photo')) {
+            $car->photo = $request->file('photo')->store('cars');
+        }
         $car->save();
 
         return redirect()->route('cars.index')->with('status','Dane pojazdu zostały zaktualizowane!');

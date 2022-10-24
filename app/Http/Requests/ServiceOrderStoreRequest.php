@@ -24,7 +24,7 @@ class ServiceOrderStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'damage_photo' => 'image|nullable',
+            'damage_photo' => 'nullable|image',
             'admission_date' => 'date|required',
             'description' => 'required|string',
             'price' => 'numeric',
