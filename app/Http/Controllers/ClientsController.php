@@ -112,7 +112,11 @@ class ClientsController extends Controller
      */
     public function destroy(Clients $client)
     {
-        $client->delete();
+        try {
+            $client->delete();
+        } catch(\Illuminate\Database\QueryException $ex) {
+            return redirect()->route('clients.index')->with('status','Klient nie może zostać usunięty ponieważ jego dane wystęują w obiegu dokumentów! Skontaktuj się z administratorem.');
+        } 
         return redirect()->route('clients.index')->with('status','Klient został pomyślnie usunięty!');
     }
 }

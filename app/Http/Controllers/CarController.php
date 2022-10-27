@@ -133,7 +133,12 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
-        $car->delete();
+        try {
+            $car->delete();
+        } catch(\Illuminate\Database\QueryException $ex) {
+            return redirect()->route('cars.index')->with('status','Pojazd nie może zostać usunięty ponieważ jego dane wystęują w obiegu dokumentów! Skontaktuj się z administratorem.');
+        } 
+        
         return redirect()->route('cars.index')->with('status','Pojazd został pomyślnie usunięty!');
     }
 }

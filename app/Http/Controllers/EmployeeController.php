@@ -108,7 +108,11 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        $employee->delete();
+        try {
+            $employee->delete();
+        } catch(\Illuminate\Database\QueryException $ex) {
+            return redirect()->route('employee.index')->with('status','Pracownik nie może zostać usunięty ponieważ jego dane wystęują w obiegu dokumentów! Skontaktuj się z administratorem.');
+        } 
         return redirect()->route('employee.index')->with('status','Pracownik został pomyślnie usunięty!');
     }
 }

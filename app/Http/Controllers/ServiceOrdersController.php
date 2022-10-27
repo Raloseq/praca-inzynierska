@@ -10,6 +10,7 @@ use App\Models\OrdersTimetable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ServiceOrderStoreRequest;
+use Carbon\Carbon;
 
 class ServiceOrdersController extends Controller
 {
@@ -96,6 +97,8 @@ class ServiceOrdersController extends Controller
         foreach($orders as $order) {
             if($order->end_date === $serviceOrder->end_date) {
                 $order_calendar = $order;
+            } else {
+                $order_calendar = $serviceOrder;
             }
         }
 
@@ -121,7 +124,17 @@ class ServiceOrdersController extends Controller
 
         if($request->is_done === 'on') {
             $data['is_done'] = 1;
-            $data['end_date'] = Carbon\Carbon::now();
+            $data['end_date'] = Carbon::now();
+
+            $basic  = new \Vonage\Client\Credentials\Basic("3cd76013", env('NEXMO_SECRET'));
+            $client = new \Vonage\Client($basic);
+
+            $response = $client->sms()->send(
+                new \Vonage\SMS\Message\SMS("505952848", 'Rafal Brzezinski', 'Twoje zlecenie warsztatowe własnie dobiegło końca możesz odebrać swój samochód. Zlecenie:' . $request->description)
+            );
+            
+            $message = $response->current();
+
         } else {
             $data['is_done'] = 0;
         }
@@ -129,6 +142,8 @@ class ServiceOrdersController extends Controller
         if($request->hasFile('damage_photo')) {
             $serviceOrder->damage_photo = $request->file('damage_photo')->store('service_orders');
         }
+
+
 
         $serviceOrder->fill($data);
         $serviceOrder->save();
@@ -164,6 +179,8 @@ class ServiceOrdersController extends Controller
         foreach($orders as $order) {
             if($order->end_date === $serviceOrder->end_date) {
                 $order_calendar = $order;
+            } else {
+                $order_calendar = $serviceOrder;
             }
         }
 
