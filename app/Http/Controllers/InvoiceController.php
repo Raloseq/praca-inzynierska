@@ -1,32 +1,28 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\ServiceOrders;
+use App\Models\Clients;
+use App\Models\ClientAddress;
 use Illuminate\Http\Request;
-use LaravelDaily\Invoices\Invoice;
-use LaravelDaily\Invoices\Classes\Buyer;
-use LaravelDaily\Invoices\Classes\InvoiceItem;
+use Auth;
 
 class InvoiceController extends Controller
 {
-    public function show()
+    public function generateInvoice(Request $request)
     {
-        $customer = new Buyer([
-            'name'          => 'John Doe',
-            'custom_fields' => [
-                'email' => 'test@example.com',
-            ],
+        $order = ServiceOrders::findOrFail($request->order_id);
+        $client = Clients::findOrFail($order->client_id);
+        $address = ClientAddress::where('client_id', $client->id)->first();
+
+        $pdf = PDF::loadView('invoice.invoice', [
+            'client' => $client,
+            'order' => $order,
+            'address' => $address,
+            'user' => Auth::user()
         ]);
 
-        $item = (new InvoiceItem())->title('Service 1')->pricePerUnit(2);
-
-        $invoice = Invoice::make()
-            ->buyer($customer)
-            ->discountByPercent(10)
-            ->taxRate(15)
-            ->shipping(1.99)
-            ->addItem($item);
-
-        return $invoice->stream();
+        return $pdf->stream();
     }
 }

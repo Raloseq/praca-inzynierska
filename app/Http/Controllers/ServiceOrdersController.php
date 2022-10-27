@@ -61,7 +61,6 @@ class ServiceOrdersController extends Controller
             'end' => $request->end_date,
             'user_id' => Auth::id()
         ]);
-
         $service_order->user_id = Auth::id();
         $service_order->save();
         return redirect()->route('service_orders.index')->with('status','Zlecenie zostało pomyślnie dodane!');
@@ -122,6 +121,7 @@ class ServiceOrdersController extends Controller
 
         if($request->is_done === 'on') {
             $data['is_done'] = 1;
+            $data['end_date'] = Carbon\Carbon::now();
         } else {
             $data['is_done'] = 0;
         }

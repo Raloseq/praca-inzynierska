@@ -76,8 +76,7 @@
                 @if(!is_null($order->damage_photo))
                     <img src="{{ asset('storage/' . $order->damage_photo) }}" alt="">
                 @else
-                
-                <img src="https://via.placeholder.com/150" alt="">
+                    <img src="https://via.placeholder.com/150" alt="">
                 @endif
             </td>
         </tr>
@@ -85,6 +84,10 @@
 </table>
 <div class="flex justify-between items-center my-5">
     <h2 class="ml-5">Wystaw fakture:</h2>
-    <h2 class="ml-5">Wystaw protokół serwisowy:</h2>
+    <form action="{{ route('generate-invoice') }}" method="POST">
+        @csrf
+        <input type="text" name="order_id" value="{{ $order->id }}">
+        <button type="submit">Wyslij</button>
+    </form>
 </div>
 @endsection
