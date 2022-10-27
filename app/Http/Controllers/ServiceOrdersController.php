@@ -95,11 +95,9 @@ class ServiceOrdersController extends Controller
         $orders = OrdersTimetable::where('user_id', Auth::id())->get();
 
         foreach($orders as $order) {
-            if($order->end_date === $serviceOrder->end_date) {
+            if($order->end === $serviceOrder->end_date) {
                 $order_calendar = $order;
-            } else {
-                $order_calendar = $serviceOrder;
-            }
+            } 
         }
 
         return view('service_orders.edit', [
@@ -126,14 +124,14 @@ class ServiceOrdersController extends Controller
             $data['is_done'] = 1;
             $data['end_date'] = Carbon::now();
 
-            $basic  = new \Vonage\Client\Credentials\Basic("3cd76013", env('NEXMO_SECRET'));
-            $client = new \Vonage\Client($basic);
+            // $basic  = new \Vonage\Client\Credentials\Basic("3cd76013", env('NEXMO_SECRET'));
+            // $client = new \Vonage\Client($basic);
 
-            $response = $client->sms()->send(
-                new \Vonage\SMS\Message\SMS("505952848", 'Rafal Brzezinski', 'Twoje zlecenie warsztatowe własnie dobiegło końca możesz odebrać swój samochód. Zlecenie:' . $request->description)
-            );
+            // $response = $client->sms()->send(
+            //     new \Vonage\SMS\Message\SMS("505952848", 'Rafal Brzezinski', 'Twoje zlecenie warsztatowe własnie dobiegło końca możesz odebrać swój samochód. Zlecenie:' . $request->description)
+            // );
             
-            $message = $response->current();
+            // $message = $response->current();
 
         } else {
             $data['is_done'] = 0;
@@ -177,11 +175,9 @@ class ServiceOrdersController extends Controller
         $orders = OrdersTimetable::where('user_id', Auth::id())->get();
 
         foreach($orders as $order) {
-            if($order->end_date === $serviceOrder->end_date) {
+            if($order->end === $serviceOrder->end_date) {
                 $order_calendar = $order;
-            } else {
-                $order_calendar = $serviceOrder;
-            }
+            } 
         }
 
         OrdersTimetable::find($order_calendar->id)->delete();
