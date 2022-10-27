@@ -122,7 +122,6 @@ class ServiceOrdersController extends Controller
 
         if($request->is_done === 'on') {
             $data['is_done'] = 1;
-            $data['end_date'] = Carbon::now();
 
             // $basic  = new \Vonage\Client\Credentials\Basic("3cd76013", env('NEXMO_SECRET'));
             // $client = new \Vonage\Client($basic);
