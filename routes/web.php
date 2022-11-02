@@ -9,6 +9,7 @@ use App\Http\Controllers\ServiceOrdersController;
 use App\Http\Controllers\OrdersTimetableController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,15 +27,16 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', ])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'verified')->group(function () {
     Route::resource('clients', ClientsController::class);
     Route::resource('client_address', ClientAddressController::class);
     Route::resource('employee', EmployeeController::class);
     Route::resource('cars', CarController::class);
     Route::resource('service_orders', ServiceOrdersController::class);
 
+    Route::resource('stats', DashboardController::class)->only(['index']);
     Route::post('generate-invoice', [InvoiceController::class, 'generateInvoice'])->name('generate-invoice');
     Route::get('fullcalendar', [OrdersTimetableController::class, 'index']);
     Route::post('fullcalendar-ajax', [OrdersTimetableController::class, 'calendarOrders']);

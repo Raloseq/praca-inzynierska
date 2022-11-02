@@ -13,7 +13,8 @@
     <style>
         ul>li>a {
             color: white;
-            font-size: 1rem;
+            padding-bottom: 0;
+            padding-top: 0;
         }
 
         a:hover {
