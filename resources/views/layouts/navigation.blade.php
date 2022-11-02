@@ -32,6 +32,9 @@
                                 {{ __('Wyloguj') }}
                             </x-dropdown-link>
                         </form>
+                        <x-dropdown-link href="{{ route('user.index') }}">
+                            {{ __('Twoje dane') }}
+                         </x-dropdown-link>
                     </x-slot>
                 </x-dropdown>
             </div>

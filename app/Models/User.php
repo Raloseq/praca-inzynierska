@@ -26,7 +26,15 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
+        'remember_token'
+    ];
+
+    protected $fiable = [
+        'city',
+        'street',
+        'ZIP',
+        'NIP',
+        'company_name'
     ];
 
     /**

@@ -36,6 +36,7 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::resource('cars', CarController::class);
     Route::resource('service_orders', ServiceOrdersController::class);
 
+    Route::resource('user', UserController::class)->only(['index','edit','update']);
     Route::resource('stats', DashboardController::class)->only(['index']);
     Route::post('generate-invoice', [InvoiceController::class, 'generateInvoice'])->name('generate-invoice');
     Route::get('fullcalendar', [OrdersTimetableController::class, 'index']);
