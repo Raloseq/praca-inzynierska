@@ -27,9 +27,9 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', ])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::middleware('auth', 'verified')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::resource('clients', ClientsController::class);
     Route::resource('client_address', ClientAddressController::class);
     Route::resource('employee', EmployeeController::class);
