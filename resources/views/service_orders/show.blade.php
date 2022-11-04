@@ -50,7 +50,7 @@
             </th>
             <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                Dane klienta
-                <a href="{{ url('clients/'.$order->client_id.'' )}}" class="font-mediumdark bg-green-500 py-2 px-4 cursor-pointer text-white mx-5">Sprwadź</a>
+                <a href="{{ url('clients/'.$order->client_id.'' )}}" class="font-mediumdark bg-green-500 py-2 px-4 cursor-pointer text-white mx-5">Sprawdź</a>
             </td>
         </tr>
         <tr>
@@ -59,7 +59,7 @@
             </th>
             <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 Dane pracownika
-                <a href="{{ url('employee/'.$order->employee_id.'' )}}" class="font-mediumdark bg-green-500 py-2 px-4 cursor-pointer text-white mx-5">Sprwadź</a>
+                <a href="{{ url('employee/'.$order->employee_id.'' )}}" class="font-mediumdark bg-green-500 py-2 px-4 cursor-pointer text-white mx-5">Sprawdź</a>
             </td>
         </tr>
         <tr>

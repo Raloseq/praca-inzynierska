@@ -34,4 +34,13 @@ class ServiceOrderStoreRequest extends FormRequest
             'end_date' => 'required'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'damage_photo.image' => 'To musi być zdjęcie',
+            'admisstion_date' => 'Wartość musi być datą',
+            'price.numeric' => 'Cena musi być wartością liczbową'
+        ];
+    }
 }

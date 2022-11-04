@@ -75,7 +75,9 @@
             @endforeach
         </tbody>
     </table>
-    {{ $clients->links() }}
+    <div class="px-5 py-5">
+        {{ $clients->links() }}
+    </div>
 </div>
 
 @endsection

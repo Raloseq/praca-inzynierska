@@ -31,4 +31,15 @@ class UserDataRequest extends FormRequest
             'comapny_name' => 'nullable|string|unique:users|max:30'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'NIP.digits' => 'NIP powinieni zawierać 10 cyfr',
+            'NIP.numeric' => 'NIP nie powinien posiadać liter w sobie',
+            'NIP.unique' => 'Podany NIP już widnieje w bazie',
+            'comapny_name.max' => 'Nazwa firmy jest za długa',
+            'comapny_name.unique' => 'Podana nazwa firmy już widnieje w bazie',
+        ];
+    }
 }

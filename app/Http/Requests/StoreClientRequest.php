@@ -24,8 +24,8 @@ class StoreClientRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:30',
-            'surname' => 'required|string|max:30',
+            'name' => 'required|string|max:30|alpha',
+            'surname' => 'required|string|max:30|alpha',
             'phone' => 'required|string|numeric|unique:clients',
             'email' => 'required|unique:clients|email',
             'NIP' => 'nullable|string|digits:10|unique:clients|numeric',
@@ -36,7 +36,24 @@ class StoreClientRequest extends FormRequest
     public function messages()
     {
         return [
-            'phone.numeric' => 'Telefon powinien zawierać tylko cyfry'
+            'name.required' => 'Podaj imie',
+            'name.string' => 'Imie musi posiadać tylko znaki',
+            'name.max' => 'Imie jest za długie',
+            'name.alpha' => 'Imie musi składać się tylko ze znaków',
+            'surname.required' => 'Podaj nazwisko',
+            'surname.string' => 'Nazwisko musi posiadać tylko znaki',
+            'surname.max' => 'Nazwisko jest za duże',
+            'surname.alpha' => 'Nazwisko musi składać się tylko ze znaków',
+            'phone.numeric' => 'Telefon powinien zawierać tylko cyfry',
+            'phone.required' => 'Podaj numer telefonu',
+            'phone.unique' => 'Podany numer już widnieje w bazie',
+            'email.unique' => 'Podany emial już widnieje w bazie',
+            'NIP.digits' => 'NIP powinieni zawierać 10 cyfr',
+            'NIP.numeric' => 'NIP nie powinien posiadać liter w sobie',
+            'NIP.unique' => 'Podany NIP już widnieje w bazie',
+            'comapny_name.max' => 'Nazwa firmy jest za długa',
+            'comapny_name.unique' => 'Podana nazwa firmy już widnieje w bazie',
+            'email.email' => 'Podany email jest błędny'
         ];
     }
 }

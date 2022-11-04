@@ -25,9 +25,19 @@ class CarStoreRequest extends FormRequest
     {
         return [
             'VIN' => 'required|digits:17',
-            'registration_number' => 'required|digits:6',
+            'registration_number' => 'required|min:5|max:7',
             'year' => 'date',
             'photo' => 'image'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'VIN.digits' => 'VIN musi zawierać 17 znaków',
+            'registration_number.min' => 'Numer rejestracyjny musi posiadać minimum 5 znaków',
+            'registration_number.max' => 'Numer rejestracyjny musi posiadać maksymalnie 7 znaków',
+            'photo.image' => 'Przesłany plik musi być zdjęciem'
         ];
     }
 }

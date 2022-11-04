@@ -23,7 +23,7 @@
 
     <div class="mt-4">
         <x-input-label for="brand" :value="__('Marka pojazdu')" />
-        <select name="brand" id="brand" class="form-control">
+        <select name="brand" id="brand" class="form-control" required>
             <option value=""> -- Select One --</option>
             @foreach($brands as $brand)
                 <option value="{{ $brand }}">
@@ -35,7 +35,7 @@
 
     <div class="mt-4">
         <x-input-label for="model" :value="__('Model pojazdu')" />
-        <select name="model" id="model" class="form-control">
+        <select name="model" id="model" class="form-control" required>
             <option value=""> -- Select One --</option>
             @foreach($models as $model)
                 <option value="{{ $model }}">
@@ -47,7 +47,7 @@
     
     <div class="mt-4">
         <x-input-label for="type" :value="__('Rodzaj pojazdu')" />
-        <select name="type" id="type" class="form-control">
+        <select name="type" id="type" class="form-control" required>
             <option value=""> -- Select One --</option>
             @foreach($types as $type)
                 <option value="{{ $type }}">
