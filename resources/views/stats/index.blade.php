@@ -25,7 +25,11 @@
                 Pracownik miesiąca
             </th>
             <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                {{ $topEmployee->name }} {{ $topEmployee->surname }}
+                @if($topEmployee == 0)
+                    <p>Nie ma jeszcze w tym miesiącu</p>
+                @else
+                    {{ $topEmployee->name }} {{ $topEmployee->surname }}
+                @endif
             </td>
         </tr>
         <tr>
@@ -33,7 +37,11 @@
                 Klient miesiąca
             </th>
             <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                {{ $topClient->name }} {{ $topClient->surname }}
+                @if($topClient == 0)
+                    <p>Nie ma jeszcze w tym miesiącu</p>
+                @else
+                    {{ $topClient->name }} {{ $topClient->surname }}
+                @endif
             </td>
         </tr>
     </thead>

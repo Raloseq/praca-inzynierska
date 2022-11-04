@@ -25,23 +25,32 @@ class DashboardController extends Controller
             ->groupBy('employee_id')
             ->orderByRaw('COUNT(*) DESC')
             ->limit(1)
-            ->get();
+            ->first();
 
-        $topEmployee = Employee::where('id',$topEmployeeID[0]->employee_id)->get();
-
+        if( is_null($topEmployeeID) ) {
+            $topEmployee = 0;
+        } else {
+            $topEmployee = Employee::where('id',$topEmployeeID->employee_id)->first();
+        }
+        
         $topClientID = ServiceOrders::select('client_id')
             ->groupBy('client_id')
             ->orderByRaw('COUNT(*) DESC')
             ->limit(1)
-            ->get(); 
+            ->first(); 
 
-        $topClient = Clients::where('id',$topClientID[0]->client_id)->get();
+        if( is_null($topClientID) ) {
+            $topClient = 0;
+        } else {
+            $topClient = Clients::where('id',$topClientID->client_id)->first();
+        }
+
         return view('stats.index', [
             'clients' => $clients,
             'employees' => $employees,
             'orders' => $orders,
-            'topClient' => $topClient[0],
-            'topEmployee' => $topEmployee[0]
+            'topClient' => $topClient,
+            'topEmployee' => $topEmployee
         ]);
     }
 }
