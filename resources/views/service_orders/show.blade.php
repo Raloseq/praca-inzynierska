@@ -1,6 +1,6 @@
 @extends('dashboard')
 @section('content')
-<h1 class="m-10 font">Szczegółowe informacje na temat</h1>
+<h1 class="m-10 font">Faktura nr. {{$order->id}}</h1>
 @include('components.status-messages')
 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -49,7 +49,8 @@
                 Klient
             </th>
             <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <a href="{{ url('clients/'.$order->client_id.'' )}}">Dane klienta</a>
+               Dane klienta
+                <a href="{{ url('clients/'.$order->client_id.'' )}}" class="font-mediumdark bg-green-500 py-2 px-4 cursor-pointer text-white mx-5">Sprwadź</a>
             </td>
         </tr>
         <tr>
@@ -57,7 +58,8 @@
                 Pracownik
             </th>
             <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <a href="{{ url('employee/'.$order->employee_id.'' )}}">Dane pracownika</a>
+                Dane pracownika
+                <a href="{{ url('employee/'.$order->employee_id.'' )}}" class="font-mediumdark bg-green-500 py-2 px-4 cursor-pointer text-white mx-5">Sprwadź</a>
             </td>
         </tr>
         <tr>
@@ -65,7 +67,8 @@
                 Pojazd
             </th>
             <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <a href="{{ url('cars/'.$order->car_id.'' )}}">Dane pojazdu</a>
+                Dane pojazdu
+                <a href="{{ url('cars/'.$order->car_id.'' )}}" class="font-mediumdark bg-green-500 py-2 px-4 cursor-pointer text-white mx-5">Sprawdź</a>
             </td>
         </tr>
         <tr>
@@ -82,12 +85,12 @@
         </tr>
     </thead>
 </table>
-<div class="flex justify-between items-center my-5">
+<div class="flex items-center my-5">
     <h2 class="ml-5">Wystaw fakture:</h2>
-    <form action="{{ route('generate-invoice') }}" method="POST">
+    <form action="{{ route('generate-invoice') }}" method="POST" class="mx-20">
         @csrf
-        <input type="text" name="order_id" value="{{ $order->id }}">
-        <button type="submit">Wyslij</button>
+        <input type="hidden" name="order_id" value="{{ $order->id }}">
+        <button type="submit" class="font-mediumdark bg-green-500 py-2 px-4 cursor-pointer text-white">Generuj</button>
     </form>
 </div>
 @endsection

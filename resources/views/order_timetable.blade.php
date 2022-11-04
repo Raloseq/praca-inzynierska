@@ -13,8 +13,7 @@
     <style>
         ul>li>a {
             color: white;
-            padding-bottom: 0;
-            padding-top: 0;
+            padding: 0 !important;
         }
 
         a:hover {
@@ -64,7 +63,7 @@
                 selectable: true,
                 selectHelper: true,
                 select: function(start, end, allDay) {
-                    var title = prompt('Event Title:');
+                    var title = prompt('Nazwa wydarzenia:');
                     if (title) {
                         var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
                         var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
@@ -80,7 +79,7 @@
                             },
                             type: "POST",
                             success: function(data) {
-                                displayMessage("Event Created Successfully");
+                                displayMessage("Zlecenie zostało dodane");
 
                                 calendar.fullCalendar('renderEvent', {
                                     id: data.id,
@@ -112,12 +111,12 @@
                         },
                         type: "POST",
                         success: function(response) {
-                            displayMessage("Event Updated Successfully");
+                            displayMessage("Zlecenie zostało zaktualizowane");
                         }
                     });
                 },
                 eventClick: function(event) {
-                    var deleteMsg = confirm("Do you really want to delete?");
+                    var deleteMsg = confirm("Chcesz usunąć umówioną wizytę?");
                     if (deleteMsg) {
                         $.ajax({
                             type: "POST",
@@ -128,7 +127,7 @@
                             },
                             success: function(response) {
                                 calendar.fullCalendar('removeEvents', event.id);
-                                displayMessage("Event Deleted Successfully");
+                                displayMessage("Zlecenie zostało usunięte");
                             }
                         });
                     }

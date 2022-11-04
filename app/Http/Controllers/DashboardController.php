@@ -28,9 +28,10 @@ class DashboardController extends Controller
             ->first();
 
         if( is_null($topEmployeeID) ) {
-            $topEmployee = 0;
+            $topEmployee = null;
         } else {
             $topEmployee = Employee::where('id',$topEmployeeID->employee_id)->first();
+            
         }
         
         $topClientID = ServiceOrders::select('client_id')
@@ -40,7 +41,7 @@ class DashboardController extends Controller
             ->first(); 
 
         if( is_null($topClientID) ) {
-            $topClient = 0;
+            $topClient = null;
         } else {
             $topClient = Clients::where('id',$topClientID->client_id)->first();
         }
