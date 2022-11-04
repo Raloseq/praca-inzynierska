@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class EmployeeStoreRequest extends FormRequest
+class UpdateEmployeeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,7 @@ class EmployeeStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -27,7 +27,7 @@ class EmployeeStoreRequest extends FormRequest
         return [
             'name' => 'required|string|max:30|alpha',
             'surname' => 'required|string|max:30|alpha',
-            'phone' => 'required"|string|unique:employee|numeric',
+            'phone' => ['required','string',Rule::unique('employee')->ignore($this->employee->id),'numeric'],
             'salary' => 'required|min:2000|numeric',
         ];
     }

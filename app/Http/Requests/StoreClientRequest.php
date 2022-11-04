@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreClientRequest extends FormRequest
 {
@@ -27,9 +28,9 @@ class StoreClientRequest extends FormRequest
             'name' => 'required|string|max:30|alpha',
             'surname' => 'required|string|max:30|alpha',
             'phone' => 'required|string|numeric|unique:clients',
-            'email' => 'required|unique:clients|email',
-            'NIP' => 'nullable|string|digits:10|unique:clients|numeric',
-            'comapny_name' => 'nullable|string|unique:clients|max:30'
+            'email' => 'required|email|unique:clients',
+            'NIP' => 'nullable|string|digits:10|numeric|unique:clients',
+            'comapny_name' => 'nullable|string|max:30|unique:clients'
         ];
     }
 

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CarStoreRequest extends FormRequest
+class UpdateCarRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,8 @@ class CarStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'VIN' => 'required|digits:17|unique:cars',
-            'registration_number' => 'required|min:5|max:7|unique:cars',
+            'VIN' => ['required','digits:17',Rule::unique('cars')->ignore($this->car->id)],
+            'registration_number' => ['required','min:5','max:7',Rule::unique('cars')->ignore($this->car->id)],
             'year' => 'date',
             'photo' => 'image'
         ];

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserDataRequest;
-
+use App\Http\Requests\UpdateUserDataRequest;
 class UserController extends Controller
 {
     public function index()
@@ -21,7 +21,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(UserDataRequest $request, User $user)
+    public function update(UpdateUserDataRequest $request, User $user)
     {
         $user->fill($request->validated());
     

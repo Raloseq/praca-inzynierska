@@ -8,7 +8,7 @@ use App\Models\ServiceOrders;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreClientRequest;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Requests\UpdateClientRequest;
 class ClientsController extends Controller
 {
     /**
@@ -96,7 +96,7 @@ class ClientsController extends Controller
      * @param  \App\Models\Clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreClientRequest $request, Clients $client)
+    public function update(UpdateClientRequest $request, Clients $client)
     {
         $client->fill($request->validated());
         $client->save();

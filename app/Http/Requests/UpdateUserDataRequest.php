@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UserDataRequest extends FormRequest
+class UpdateUserDataRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,8 +28,8 @@ class UserDataRequest extends FormRequest
             'city' => 'string|required',
             'street' => 'string|required',
             'ZIP' => 'required|regex:/\b\d{5}\b/',
-            'NIP' => ['nullable','string','digits:10','numeric','unique:users'],
-            'comapny_name' => ['nullable','string','max:30','unique:users']
+            'NIP' => ['nullable','string','digits:10','numeric',Rule::unique('users')->ignore($this->user->id)],
+            'comapny_name' => ['nullable','string','max:30',Rule::unique('users')->ignore($this->user->id)]
         ];
     }
 

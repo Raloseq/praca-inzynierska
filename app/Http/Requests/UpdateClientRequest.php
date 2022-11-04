@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class EmployeeStoreRequest extends FormRequest
+class UpdateClientRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,8 +27,10 @@ class EmployeeStoreRequest extends FormRequest
         return [
             'name' => 'required|string|max:30|alpha',
             'surname' => 'required|string|max:30|alpha',
-            'phone' => 'required"|string|unique:employee|numeric',
-            'salary' => 'required|min:2000|numeric',
+            'phone' => ['required','string','numeric',Rule::unique('clients')->ignore($this->client->id)],
+            'email' => ['required','email',Rule::unique('clients')->ignore($this->client->id)],
+            'NIP' => ['nullable','string','digits:10','numeric',Rule::unique('clients')->ignore($this->client->id)],
+            'comapny_name' => ['nullable','string','max:30',Rule::unique('clients')->ignore($this->client->id)]
         ];
     }
 
@@ -46,8 +48,13 @@ class EmployeeStoreRequest extends FormRequest
             'phone.numeric' => 'Telefon powinien zawierać tylko cyfry',
             'phone.required' => 'Podaj numer telefonu',
             'phone.unique' => 'Podany numer już widnieje w bazie',
-            'salary.min' => 'Wartość musi być większa niż 2000',
-            'salary.numeric' => 'Wartość musi posiadać same cyfry'
+            'email.unique' => 'Podany emial już widnieje w bazie',
+            'NIP.digits' => 'NIP powinieni zawierać 10 cyfr',
+            'NIP.numeric' => 'NIP nie powinien posiadać liter w sobie',
+            'NIP.unique' => 'Podany NIP już widnieje w bazie',
+            'comapny_name.max' => 'Nazwa firmy jest za długa',
+            'comapny_name.unique' => 'Podana nazwa firmy już widnieje w bazie',
+            'email.email' => 'Podany email jest błędny'
         ];
     }
 }
