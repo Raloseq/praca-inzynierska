@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreClientRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateClientRequest;
+use Illuminate\Support\Facades\Gate;
+
 class ClientsController extends Controller
 {
     /**
@@ -65,6 +67,8 @@ class ClientsController extends Controller
      */
     public function show(Clients $client)
     {   
+        Gate::authorize('view', $client);
+
         $client_id = $client->id;
         $address = Clients::find($client_id)->client_address;
 
@@ -92,6 +96,8 @@ class ClientsController extends Controller
      */
     public function edit(Clients $client)
     {
+        Gate::authorize('update', $client);
+        
         return view('clients.edit', [
             'client' => $client
         ]);
@@ -106,6 +112,8 @@ class ClientsController extends Controller
      */
     public function update(UpdateClientRequest $request, Clients $client)
     {
+        Gate::authorize('update', $client);
+
         $client->fill($request->validated());
         $client->save();
 
@@ -120,6 +128,8 @@ class ClientsController extends Controller
      */
     public function destroy(Clients $client)
     {
+        Gate::authorize('delete', $client);
+
         try {
             $client->delete();
         } catch(\Illuminate\Database\QueryException $ex) {

@@ -8,6 +8,7 @@ use App\Http\Requests\EmployeeStoreRequest;
 use App\Http\Requests\EmployeeUpdateRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ServiceOrders;
+use Illuminate\Support\Facades\Gate;
 
 class EmployeeController extends Controller
 {
@@ -65,6 +66,8 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
+        Gate::authorize('view', $employee);
+
         $orders = ServiceOrders::with('employees')->get();
         $doneOrders = [];
 
@@ -88,6 +91,8 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
+        Gate::authorize('update', $employee);
+
         return view('employee.edit', [
             'employee' => $employee
         ]);
@@ -102,6 +107,8 @@ class EmployeeController extends Controller
      */
     public function update(EmployeeStoreRequest $request, Employee $employee)
     {
+        Gate::authorize('update', $employee);
+
         $employee->fill($request->validated());
         $employee->save();
 
@@ -116,6 +123,8 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
+        Gate::authorize('delete', $employee);
+
         try {
             $employee->delete();
         } catch(\Illuminate\Database\QueryException $ex) {

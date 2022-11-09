@@ -10,6 +10,7 @@ use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CarStoreRequest;
+use Illuminate\Support\Facades\Gate;
 
 class CarController extends Controller
 {
@@ -79,6 +80,7 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
+        Gate::authorize('view', $car);
 
         $orders = ServiceOrders::with('cars')->get();
         $doneOrders = [];
@@ -103,6 +105,8 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {   
+        Gate::authorize('update', $car);
+
         $models = CarModel::pluck('name', 'id');
         $types = Type::pluck('name', 'id');
         $brands = Brand::pluck('name', 'id');
@@ -124,6 +128,8 @@ class CarController extends Controller
      */
     public function update(CarStoreRequest $request, Car $car)
     {
+        Gate::authorize('update', $car);
+
         $car->fill($request->validated());
         if($request->hasFile('photo')) {
             $car->photo = $request->file('photo')->store('cars');
@@ -141,6 +147,8 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
+        Gate::authorize('delete', $car);
+
         try {
             $car->delete();
         } catch(\Illuminate\Database\QueryException $ex) {

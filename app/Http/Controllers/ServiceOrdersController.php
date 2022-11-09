@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ServiceOrderStoreRequest;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Gate;
 
 class ServiceOrdersController extends Controller
 {
@@ -83,6 +84,8 @@ class ServiceOrdersController extends Controller
      */
     public function show(ServiceOrders $serviceOrder)
     {
+        Gate::authorize('view', $serviceOrder);
+
         return view('service_orders.show', [
             'order' => $serviceOrder
         ]);
@@ -96,6 +99,8 @@ class ServiceOrdersController extends Controller
      */
     public function edit(ServiceOrders $serviceOrder)
     {
+        Gate::authorize('update', $serviceOrder);
+
         $clients = Clients::where('user_id', Auth::id())->get();
         $cars = Car::where('user_id', Auth::id())->get();
         $employees = Employee::where('user_id', Auth::id())->get();
@@ -126,6 +131,8 @@ class ServiceOrdersController extends Controller
      */
     public function update(ServiceOrderStoreRequest $request, ServiceOrders $serviceOrder)
     {   
+        Gate::authorize('update', $serviceOrder);
+
         $data = $request->validated();
 
         if($request->is_done === 'on') {
@@ -170,6 +177,8 @@ class ServiceOrdersController extends Controller
      */
     public function destroy(ServiceOrders $serviceOrder)
     {
+        Gate::authorize('delete', $serviceOrder);
+
         $this->deleteOrderTimetable($serviceOrder);
         $serviceOrder->delete();
         

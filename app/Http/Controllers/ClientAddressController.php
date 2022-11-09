@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ClientAddress;
 use Illuminate\Http\Request;
 use App\Models\Clients;
+use Illuminate\Support\Facades\Gate;
 
 class ClientAddressController extends Controller
 {
