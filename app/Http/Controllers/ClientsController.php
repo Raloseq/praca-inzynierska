@@ -18,7 +18,15 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        $clients = Clients::where('user_id', Auth::id())->paginate(5);
+        if (request('search')) {
+            $clients = Clients::where([
+                ['surname', 'like', '%' . request('search') . '%'],
+                ['user_id', Auth::id()]
+                ])->paginate(5);
+        } else {
+            $clients = Clients::where('user_id', Auth::id())->paginate(5);
+        }
+        
 
         return view('clients.index', [
             'clients' => $clients

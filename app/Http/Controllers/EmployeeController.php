@@ -18,7 +18,15 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::where('user_id', Auth::id())->paginate(5);
+        if (request('search')) {
+            $employees = Employee::where([
+                ['surname', 'like', '%' . request('search') . '%'],
+                ['user_id', Auth::id()]
+                ])->paginate(5);
+        } else {
+            $employees = Employee::where('user_id', Auth::id())->paginate(5);
+        }
+        
 
         return view('employee.index', [
             'employees' => $employees

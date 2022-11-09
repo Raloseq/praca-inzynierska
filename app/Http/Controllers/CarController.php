@@ -20,7 +20,15 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::where('user_id', Auth::id())->paginate(5);
+        if (request('search')) {
+            $cars = Car::where([
+                ['registration_number', 'like', '%' . request('search') . '%'],
+                ['user_id', Auth::id()]
+                ])->paginate(5);
+        } else {
+            $cars = Car::where('user_id', Auth::id())->paginate(5);
+        }
+        
         
         return view('cars.index', [
             'cars' => $cars
