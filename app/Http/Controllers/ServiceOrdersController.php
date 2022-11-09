@@ -21,7 +21,15 @@ class ServiceOrdersController extends Controller
      */
     public function index()
     {
-        $orders = ServiceOrders::where('user_id', Auth::id())->paginate(5);
+        if (request('search')) {
+            $orders = ServiceOrders::where([
+                ['description', 'like', '%' . request('search') . '%'],
+                ['user_id', Auth::id()]
+                ])->paginate(5);
+        } else {
+            $orders = ServiceOrders::where('user_id', Auth::id())->paginate(5);
+        }
+        
 
         return view('service_orders.index', [
             'orders' => $orders,
