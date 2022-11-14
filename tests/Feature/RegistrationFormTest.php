@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
 
 class RegistrationFormTest extends TestCase
 {
@@ -30,9 +31,9 @@ class RegistrationFormTest extends TestCase
             'password_confirmation' => 'password',
             'city' => 'Warszawa',
             'street' => 'Sloneczna 10',
-            'ZIP' => '06143',
+            'ZIP' => '0613',
             'NIP' => '2019384751',
-            'comapny_name' => 'Testowo'
+            'company_name' => 'Testowo'
         ]);
  
         $this->assertAuthenticated();

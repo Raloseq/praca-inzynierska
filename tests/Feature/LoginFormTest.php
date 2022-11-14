@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
 
 class LoginFormTest extends TestCase
 {
@@ -13,7 +14,7 @@ class LoginFormTest extends TestCase
      *
      * @return void
      */
-    use RefreshDatabase;
+
     public function test_can_show_login_form()
     {
         $response = $this->get('/login');
@@ -23,9 +24,11 @@ class LoginFormTest extends TestCase
 
     public function test_users_can_login()
     {
+        $user = User::factory()->create();
+
         $response = $this->post('/login', [
-            'email' => 'test@test.pl',
-            'password' => 'test1234',
+            'email' => $user->email,
+            'password' => 'password',
         ]);
  
         $this->assertAuthenticated();

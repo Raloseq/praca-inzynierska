@@ -50,14 +50,6 @@
         </tr>
         <tr>
             <th scope="col" class="py-3 px-6">
-                Marka
-            </th>
-            <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                {{$car->brand}}
-            </td>
-        </tr>
-        <tr>
-            <th scope="col" class="py-3 px-6">
                 Model
             </th>
             <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
