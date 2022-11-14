@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Employee;
 
 class EmployeeSeeder extends Seeder
 {
@@ -17,16 +18,6 @@ class EmployeeSeeder extends Seeder
 
     public function run()
     {
-        $faker = \Faker\Factory::create();
-        for($i = 0; $i < 10; $i++) {
-            DB::table('employee')->insert([
-                'name' => $faker->name(),
-                'surname' => $faker->name(),
-                'phone' => $faker->numerify('###-###-###'),
-                'salary' => $faker->numberBetween(2000,3500),
-                'position' => $faker->randomElement(['junior','mid','sernior']),
-                'user_id' => $faker->numberBetween(2,5)
-            ]);
-        }
+        Employee::factory()->times(10)->create();
     }
 }

@@ -20,7 +20,6 @@ class CarModelSeeder extends Seeder
         for($i = 0; $i < 20; $i++) {
             DB::table('model')->insert([
                 'name' => $faker->text(6),
-                'brand_id' => $faker->numberBetween(1,15),
             ]);
         }
     }

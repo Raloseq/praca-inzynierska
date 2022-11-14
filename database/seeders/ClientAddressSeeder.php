@@ -15,16 +15,6 @@ class ClientAddressSeeder extends Seeder
      */
     public function run()
     {
-        $faker = \Faker\Factory::create();
         
-        for($i = 0; $i < 15; $i++) {
-            DB::table('client_addresses')->insert([
-                'voivodeship' => $faker->word(),
-                'city' => $faker->word(),
-                'street' => $faker->word(),
-                'ZIP' => $faker->numerify('##-###'),
-                'client_id' => $faker->numberBetween(1,14)
-            ]);
-        }
     }
 }

@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('photo',200)->nullable();
             $table->string('type', 20);
             $table->string('model', 20);
-            $table->string('brand', 20);
             $table->unsignedBigInteger('user_id');
         });
     }

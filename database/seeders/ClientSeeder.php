@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Clients;
+use App\Models\ClientAddress;
 
 class ClientSeeder extends Seeder
 {
@@ -15,17 +17,13 @@ class ClientSeeder extends Seeder
      */
     public function run()
     {
-        $faker = \Faker\Factory::create();
-        for($i = 0; $i < 10; $i++) {
-            DB::table('clients')->insert([
-                'name' => $faker->name(),
-                'surname' => $faker->name(),
-                'phone' => $faker->numerify('#########'),
-                'email' => $faker->email(),
-                'NIP' => $faker->numerify('##########'),
-                'company_name' => $faker->text(7),
-                'user_id' => $faker->numberBetween(1,3)
-            ]);
-        }
+        Clients::factory()->times(10)->create()->each(function ($client) {
+            ClientAddress::factory()->for($client)->create();
+        });
+
+        // factory(App\Clients::class, 10)->create()->each(function ($client) {
+        //     $address = factory(App\ClientAddress::class)->make();
+        //     $client->address()->save($address);
+        // });
     }
 }

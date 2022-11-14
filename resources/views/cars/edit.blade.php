@@ -22,18 +22,6 @@
     </div>
 
     <div class="mt-4">
-        <x-input-label for="brand" :value="__('Marka pojazdu')" />
-        <select name="brand" id="brand" class="form-control">
-            <option value="{{$car->brand}}"> {{$car->brand}}</option>
-            @foreach($brands as $brand)
-                <option value="{{ $brand }}">
-                    {{ $brand }}
-                </option>
-            @endforeach
-        </select>
-    </div>
-
-    <div class="mt-4">
         <x-input-label for="model" :value="__('Model pojazdu')" />
         <select name="model" id="model" class="form-control">
             <option value="{{$car->model}}"> {{$car->model}}</option>

@@ -6,7 +6,6 @@ use App\Models\Car;
 use App\Models\CarModel;
 use App\Models\ServiceOrders;
 use App\Models\Type;
-use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CarStoreRequest;
@@ -45,12 +44,10 @@ class CarController extends Controller
     {
         $models = CarModel::pluck('name', 'id');
         $types = Type::pluck('name', 'id');
-        $brands = Brand::pluck('name', 'id');
 
         return view('cars.create',[
             'models' => $models,
-            'types' => $types,
-            'brands' => $brands
+            'types' => $types
         ]);
     }
 
@@ -67,7 +64,6 @@ class CarController extends Controller
         $car->user_id = Auth::id();
         $car->type = $request->type;
         $car->model = $request->model;
-        $car->brand = $request->brand;
         $car->save();
         return redirect()->route('cars.index')->with('status','Pojazd został pomyślnie dodany!');
     }
@@ -109,13 +105,11 @@ class CarController extends Controller
 
         $models = CarModel::pluck('name', 'id');
         $types = Type::pluck('name', 'id');
-        $brands = Brand::pluck('name', 'id');
 
         return view('cars.edit',[
             'car' => $car,
             'models' => $models,
             'types' => $types,
-            'brands' => $brands
         ]);
     }
 
