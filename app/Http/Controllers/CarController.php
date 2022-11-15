@@ -9,6 +9,7 @@ use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CarStoreRequest;
+use App\Http\Requests\UpdateCarRequest;
 use Illuminate\Support\Facades\Gate;
 
 class CarController extends Controller
@@ -16,7 +17,7 @@ class CarController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -28,8 +29,8 @@ class CarController extends Controller
         } else {
             $cars = Car::where('user_id', Auth::id())->paginate(5);
         }
-        
-        
+
+
         return view('cars.index', [
             'cars' => $cars
         ]);
@@ -38,7 +39,7 @@ class CarController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -55,7 +56,7 @@ class CarController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CarStoreRequest $request)
     {
@@ -71,8 +72,9 @@ class CarController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
+     * @param \App\Models\Car $car
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show(Car $car)
     {
@@ -97,10 +99,10 @@ class CarController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(Car $car)
-    {   
+    {
         Gate::authorize('update', $car);
 
         $models = CarModel::pluck('name', 'id');
@@ -118,9 +120,9 @@ class CarController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(CarStoreRequest $request, Car $car)
+    public function update(UpdateCarRequest $request, Car $car)
     {
         Gate::authorize('update', $car);
 
@@ -137,7 +139,7 @@ class CarController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Car $car)
     {
@@ -146,9 +148,10 @@ class CarController extends Controller
         try {
             $car->delete();
         } catch(\Illuminate\Database\QueryException $ex) {
-            return redirect()->route('cars.index')->with('status','Pojazd nie może zostać usunięty ponieważ jego dane wystęują w obiegu dokumentów! Skontaktuj się z administratorem.');
-        } 
-        
+            return redirect()->route('cars.index')->with('status','Pojazd nie może zostać usunięty ponieważ jego
+            dane wystęują w obiegu dokumentów! Skontaktuj się z administratorem.');
+        }
+
         return redirect()->route('cars.index')->with('status','Pojazd został pomyślnie usunięty!');
     }
 }

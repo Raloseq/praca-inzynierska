@@ -32,7 +32,7 @@
             @endforeach
         </select>
     </div>
-    
+
     <div class="mt-4">
         <x-input-label for="type" :value="__('Rodzaj pojazdu')" />
         <select name="type" id="type" class="form-control" required>
@@ -47,7 +47,7 @@
 
     <div class="mt-4">
         <x-input-label for="photo" :value="__('Grafika')" />
-        <x-text-input id="photo" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus />
+        <x-text-input id="photo" class="block mt-1 w-full" type="file" name="photo" :value="old('photo')" autofocus required />
         <x-input-error :messages="$errors->get('photo')" class="mt-2" />
     </div>
 
@@ -55,7 +55,7 @@
         <a href="{{ url()->previous() }}" class="bg-red-600 inline-block px-5 py-3 ml-5">Anuluj</a>
         <button class="ml-4 bg-green-600 px-5 py-3 mr-10">
             {{ __('Dodaj') }}
-        </button> 
+        </button>
     </div>
 
 </form>

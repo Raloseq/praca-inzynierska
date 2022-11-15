@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Requests\EmployeeStoreRequest;
-use App\Http\Requests\EmployeeUpdateRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ServiceOrders;
 use Illuminate\Support\Facades\Gate;
@@ -27,7 +27,7 @@ class EmployeeController extends Controller
         } else {
             $employees = Employee::where('user_id', Auth::id())->paginate(5);
         }
-        
+
 
         return view('employee.index', [
             'employees' => $employees
@@ -105,7 +105,7 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(EmployeeStoreRequest $request, Employee $employee)
+    public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
         Gate::authorize('update', $employee);
 
@@ -129,7 +129,7 @@ class EmployeeController extends Controller
             $employee->delete();
         } catch(\Illuminate\Database\QueryException $ex) {
             return redirect()->route('employee.index')->with('status','Pracownik nie może zostać usunięty ponieważ jego dane wystęują w obiegu dokumentów! Skontaktuj się z administratorem.');
-        } 
+        }
         return redirect()->route('employee.index')->with('status','Pracownik został pomyślnie usunięty!');
     }
 }
