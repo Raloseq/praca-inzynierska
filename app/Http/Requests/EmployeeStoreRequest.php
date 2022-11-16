@@ -27,7 +27,7 @@ class EmployeeStoreRequest extends FormRequest
         return [
             'name' => 'required|string|max:30|alpha',
             'surname' => 'required|string|max:30|alpha',
-            'phone' => 'required"|string|unique:employee|numeric',
+            'phone' => 'required|string|unique:employee|numeric',
             'salary' => 'required|min:2000|numeric',
         ];
     }

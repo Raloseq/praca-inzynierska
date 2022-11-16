@@ -6,9 +6,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 
 class LoginFormTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      *
