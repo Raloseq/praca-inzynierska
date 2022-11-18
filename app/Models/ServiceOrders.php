@@ -73,6 +73,6 @@ class ServiceOrders extends Model
 
     public function clients()
     {
-        return $this->belongsTo(Clients::class, 'client', 'id');
+        return $this->belongsTo(Clients::class, 'client_id', 'id');
     }
 }

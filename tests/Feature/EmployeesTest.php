@@ -52,7 +52,7 @@ class EmployeesTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
     }
 
     public function test_user_can_store_employee_when_data_is_invalid()
@@ -135,12 +135,11 @@ class EmployeesTest extends TestCase
     public function test_user_can_delete_employee()
     {
         $user = User::factory()->create();
-        
+        $this->actingAs($user);
         $employee = Employee::factory()->create();
 
-        $response = $this->actingAs($user)
-                    ->json('DELETE', "/employee/$employee->id");
+        $response = $this->json('DELETE', "/employee/$employee->id");
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
     }   
 }

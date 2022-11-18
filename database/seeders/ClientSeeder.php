@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Clients;
 use App\Models\ClientAddress;
+use Faker\Generator;
 
 class ClientSeeder extends Seeder
 {
@@ -17,13 +18,13 @@ class ClientSeeder extends Seeder
      */
     public function run()
     {
-        Clients::factory()->times(10)->create()->each(function ($client) {
-            ClientAddress::factory()->for($client)->create();
-        });
+        
 
-        // factory(App\Clients::class, 10)->create()->each(function ($client) {
-        //     $address = factory(App\ClientAddress::class)->make();
-        //     $client->address()->save($address);
-        // });
+        Clients::factory()->times(10)->create()->each(function ($client) {
+            $faker = app(Generator::class);
+            ClientAddress::factory()->for($client)->create(
+                ['client_id' => $faker->unique()->numberBetween(1,10)]
+            );
+        });
     }
 }

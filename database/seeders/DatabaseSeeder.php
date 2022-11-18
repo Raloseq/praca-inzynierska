@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             EmployeeSeeder::class,
             ClientSeeder::class,
-            ClientAddressSeeder::class,
             CarsSeeder::class
         ]);
     }

@@ -22,7 +22,6 @@ class ClientAddressFactory extends Factory
             'city' => $this->faker->city(),
             'street' => $this->faker->streetName(),
             'ZIP' => $this->faker->postcode(),
-            'client_id' => Clients::all()->random()->id,
         ];
     }
 }

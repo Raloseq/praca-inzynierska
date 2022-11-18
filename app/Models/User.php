@@ -68,7 +68,10 @@ class User extends Authenticatable
         'remember_token'
     ];
 
-    protected $fiable = [
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
         'city',
         'street',
         'ZIP',
