@@ -8,6 +8,7 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Car;
 
+
 class CarTest extends TestCase
 {
     use RefreshDatabase;
@@ -90,7 +91,7 @@ class CarTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
         $car = Car::factory()->create();
-
+ 
         $response = $this->get("/cars/$car->id/edit");
 
         $response->assertStatus(200);
@@ -103,11 +104,11 @@ class CarTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
         $car = Car::factory()->create();
-
+        
         $response = $this->json('PUT', "/cars/$car->id", [
             'VIN' => '15276123567812345',
             'registration_number' => 'WMA124',
-            'year' => '12.12.1999',
+            'year' => '1999-12-12',
             'photo' => \Illuminate\Http\UploadedFile::fake()->create('test.png', $kilobytes = 0),
             'type' => 'koparka',
             'model' => 'JBC',
@@ -141,8 +142,8 @@ class CarTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
         $car = Car::factory()->create();
-
-        $response = $this->json('DELETE', "cars/$car->id");
+        
+        $response = $this->json('DELETE', "/cars/$car->id");
 
         $response->assertStatus(302);
     }

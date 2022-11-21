@@ -22,8 +22,8 @@ class CarFactory extends Factory
     {
         return [
             'user_id' => User::all()->random()->id,
-            'type' => Type::all()->random()->name,
-            'model' => CarModel::all()->random()->name,
+            'type' => $this->faker->randomElement(['koparka', 'motocykl', 'samochod']),
+            'model' => $this->faker->randomElement(['FX470E', 'D700', 'BONNEVILLE', 'KAF400' ,'VUE']),
             'VIN' => $this->faker->bothify('#################'),
             'registration_number' => $this->faker->bothify('#######'),
             'year' => $this->faker->date(),

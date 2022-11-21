@@ -15,8 +15,6 @@ class TypeSeeder extends Seeder
      */
     public function run()
     {
-        $faker = \Faker\Factory::create();
-
         DB::table('type')->insert([
             ['name' => 'samochód'],
             ['name' => 'motocykl'],

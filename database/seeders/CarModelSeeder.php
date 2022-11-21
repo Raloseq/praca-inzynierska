@@ -15,12 +15,14 @@ class CarModelSeeder extends Seeder
      */
     public function run()
     {
-        $faker = \Faker\Factory::create();
-
-        for($i = 0; $i < 20; $i++) {
-            DB::table('model')->insert([
-                'name' => $faker->text(6),
-            ]);
-        }
+        DB::table('model')->insert([
+            ['name' => 'HYPERMOTARD 1100 S'],
+            ['name' => 'ACADIA'],
+            ['name' => 'GTX 500SS'],
+            ['name' => 'FLSTCI'],
+            ['name' => 'AN400'],
+            ['name' => 'S4'],
+            ['name' => 'L9500'],
+        ]);
     }
 }

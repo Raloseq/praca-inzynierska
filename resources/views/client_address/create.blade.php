@@ -4,7 +4,7 @@
     @csrf
     <div>
         <x-input-label for="client_id" :value="__('ID Klienta')" />
-        <x-text-input id="client_id" class="block mt-1 w-full" type="text" name="client_id" value="{{ $client_id }}" required autofocus />
+        <x-text-input id="client_id" class="block mt-1 w-full" type="text" name="client_id" value="{{ $client_id }}" required autofocus disabled />
         <x-input-error :messages="$errors->get('client_id')" class="mt-2" />
     </div>
 

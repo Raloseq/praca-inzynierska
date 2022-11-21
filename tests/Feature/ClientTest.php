@@ -105,7 +105,7 @@ class ClientTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
         $client = Clients::factory()->create();
-        
+
         $response = $this->json('PUT', "/clients/$client->id", [
             'name' => 'Rafal',
             'surname' => 'Kowalski',
@@ -121,8 +121,6 @@ class ClientTest extends TestCase
 
     public function test_user_can_edit_clients_when_data_is_invalid()
     {
-        $this->withoutExceptionHandling();
-
         $user = User::factory()->create();
         $this->actingAs($user);
         $client = Clients::factory()->create();

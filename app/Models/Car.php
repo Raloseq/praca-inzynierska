@@ -48,16 +48,6 @@ class Car extends Model
         'VIN', 'registration_number', 'year', 'type', 'model', 'photo'
     ];
 
-    public function types()
-    {
-        return $this->belongsTo(Type::class);
-    }
-
-    public function car_models()
-    {
-        return $this->belongsTo(CarModel::class);
-    }
-
     public function service_oders()
     {
         return $this->hasMany(ServiceOrders::class, 'car_id', 'id');

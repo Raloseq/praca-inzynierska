@@ -35,8 +35,6 @@ class ClientAddress extends Model
 {
     use HasFactory;
 
-    public $incrementing = false;
-
     protected $table = 'client_addresses';
 
     protected $fillable = [

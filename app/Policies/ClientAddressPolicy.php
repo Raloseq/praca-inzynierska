@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\ClientAddress;
 use App\Models\User;
+use App\Models\Clients;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 
@@ -45,16 +46,10 @@ class ClientAddressPolicy
         //
     }
 
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\ClientAddress  $clientAddress
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function update(User $user, ClientAddress $clientAddress)
+
+    public function update(Clients $client, ClientAddress $clientAddress)
     {
-        return $user->id === $clients->user_id
+        return $client->id === $clientAddress->client_id
                 ? Response::allow()
                 : Response::deny('Brak dostępu');
     }
@@ -66,9 +61,9 @@ class ClientAddressPolicy
      * @param  \App\Models\ClientAddress  $clientAddress
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, ClientAddress $clientAddress)
+    public function delete(Clients $client, ClientAddress $clientAddress)
     {
-        return $user->id === $clients->user_id
+        return $client->id === $clients->user_id
                 ? Response::allow()
                 : Response::deny('Brak dostępu');
     }

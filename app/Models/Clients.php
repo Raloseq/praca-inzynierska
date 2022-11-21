@@ -42,7 +42,6 @@ class Clients extends Model
     use HasFactory;
 
     protected $table = 'clients';
-    public $incrementing = false;
 
     protected $fillable = [
         'name', 'surname', 'phone', 'email', 'NIP', 'company_name'
