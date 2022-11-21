@@ -3,7 +3,7 @@
 namespace Database\Factories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Models\Clients;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Clients>
  */
@@ -14,6 +14,8 @@ class ClientsFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = Clients::class;
+    
     public function definition()
     { 
         return [

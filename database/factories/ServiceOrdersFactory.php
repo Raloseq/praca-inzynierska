@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Car;
 use App\Models\Employee;
 use App\Models\Clients;
+use App\Models\ServiceOrders;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ServiceOrders>
  */
@@ -17,6 +18,9 @@ class ServiceOrdersFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    protected $model = ServiceOrders::class;
+    
     public function definition()
     {
         return [

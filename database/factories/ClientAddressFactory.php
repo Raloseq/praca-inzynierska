@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Clients;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Models\ClientAddress;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ClientAddress>
  */
@@ -15,6 +15,9 @@ class ClientAddressFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    protected $model = ClientAddress::class;
+
     public function definition()
     {
         return [
