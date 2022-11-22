@@ -44,7 +44,7 @@ class Employee extends Model
         'name', 'surname', 'phone','position','salary'
     ];
 
-    public function service_oders()
+    public function service_orders()
     {
         return $this->hasMany(ServiceOrders::class, 'employee_id', 'id');
     }

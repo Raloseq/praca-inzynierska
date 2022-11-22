@@ -43,12 +43,12 @@ class Car extends Model
     use HasFactory;
 
     protected $table = 'cars';
-    
+
     protected $fillable = [
         'VIN', 'registration_number', 'year', 'type', 'model', 'photo'
     ];
 
-    public function service_oders()
+    public function service_orders()
     {
         return $this->hasMany(ServiceOrders::class, 'car_id', 'id');
     }
