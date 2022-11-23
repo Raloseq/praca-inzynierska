@@ -18,37 +18,11 @@ class DatabaseTest extends TestCase
      *
      * @return void
      */
+
     public function test_model_user_can_be_instantiated()
     {
         $user = User::factory()->create();
         $this->assertDatabaseCount('users', 1);
         $this->assertModelExists($user);
     }
-
-    // public function test_model_car_can_be_instantiated()
-    // {
-    //     $car = Car::factory()->create();
-    //     dd($car);
-    //     $this->assertModelExists($car);
-        
-    // }
-
-    // public function test_model_client_can_be_instantiated()
-    // {
-    //     $client = Clients::factory()->create();
-    //     $this->assertDatabaseCount('clients', 1);
-        
-        
-    // }
-
-    // public function test_model_employee_can_be_instantiated()
-    // {
-    //     $employee = Employee::factory()->create();
-    //     $this->assertDatabaseCount('emplyoee', 1);
-        
-        
-    // }
-    
-        
-        
 }

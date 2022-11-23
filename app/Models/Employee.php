@@ -48,4 +48,9 @@ class Employee extends Model
     {
         return $this->hasMany(ServiceOrders::class, 'employee_id', 'id');
     }
+
+    public function users()
+    {
+        $this->belongsTo(User::class);
+    }
 }
