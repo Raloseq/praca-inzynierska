@@ -1,23 +1,24 @@
-FROM php:8.1 as php
+FROM php:8.1
 
-RUN apt-get upadte -y
-RUN apt-get install -y unzip libpq-dev libcurl4-gnutls-dev
-RUN docker-php-ext-install pdo pdo_mysql bcmath
+RUN apt-get update -y && apt-get install -y \
+    nodejs \
+    npm \
+    curl \
+    zip \
+    unzip \
+    && docker-php-ext-install pdo pdo_mysql
 
-WORKDIR /var/www
+WORKDIR /var/www/html
 COPY . .
+
+RUN npm install -g n && n 14.15.0
+RUN npm install && npm run prod
+
+RUN composer install --no-interaction --no-progress
+
+RUN cd public && ln -sf ../storage/app/public/ storage
 
 COPY --from=composer:2.4.2 /usr/bin/composer /usr/bin/composer
 
 ENV PORT=8000
 ENTRYPOINT [ "docker/entrypoint.sh" ]
-
-FROM node:19-alpine as node
-
-WORKDIR /var/www
-COPY . .
-
-RUN npm install --global cross-env
-RUN npm install
-
-VOLUME /var/www/node_modules
