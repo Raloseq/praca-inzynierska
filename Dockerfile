@@ -8,17 +8,27 @@ RUN apt-get update -y && apt-get install -y \
     unzip \
     && docker-php-ext-install pdo pdo_mysql
 
-WORKDIR /var/www/html
-COPY . .
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN npm install -g n && n 14.15.0
-RUN npm install && npm run prod
+COPY . /var/www
+WORKDIR /var/www
+
+COPY --from=composer:2.4.2 /usr/bin/composer /usr/bin/composer
+
+RUN useradd www -u 1000 -ms /bin/bash
+RUN usermod -aG sudo,root www
+USER www
+RUN chmod -R 755 /var/www
+
+
+
+RUN npm init -y
+RUN npm install -g n && n 16.17.0
+RUN npm install
 
 RUN composer install --no-interaction --no-progress
 
 RUN cd public && ln -sf ../storage/app/public/ storage
-
-COPY --from=composer:2.4.2 /usr/bin/composer /usr/bin/composer
 
 ENV PORT=8000
 ENTRYPOINT [ "docker/entrypoint.sh" ]
