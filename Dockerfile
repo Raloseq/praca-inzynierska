@@ -16,17 +16,18 @@ WORKDIR /var/www
 COPY --from=composer:2.4.2 /usr/bin/composer /usr/bin/composer
 
 RUN useradd www -u 1000 -ms /bin/bash
-RUN usermod -aG sudo,root www
-USER www
-RUN chmod -R 755 /var/www
-
-
+RUN usermod -aG sudo www
+RUN chown -R www:www /var/www
 
 RUN npm init -y
 RUN npm install -g n && n 16.17.0
 RUN npm install
 
-RUN composer install --no-interaction --no-progress
+USER www
+#RUN curl -sS https://getcomposer.org/installer | php
+#RUN php composer.phar install
+#
+#RUN composer install --no-interaction --no-progress
 
 RUN cd public && ln -sf ../storage/app/public/ storage
 
