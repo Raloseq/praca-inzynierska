@@ -44,13 +44,3 @@ services:
       - "8000:8000"
     networks:
       - laravel
-
-  composer:
-    image: composer:latest
-    container_name: ${APP_NAME}-composer
-    volumes:
-      - .:/var/www/html
-    working_dir: /var/www/html
-    networks:
-      - laravel
-
