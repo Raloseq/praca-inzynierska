@@ -15,7 +15,8 @@ WORKDIR /var/www/html
 
 COPY --from=composer:2.4.2 /usr/bin/composer /usr/bin/composer
 
-
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 RUN useradd www -u 1000 -ms /bin/bash
 RUN usermod -aG sudo www
 RUN chown -R www:www /var/www/html
@@ -30,4 +31,4 @@ RUN cd public && ln -sf ../storage/app/public/ storage
 
 ENV PORT=8000
 EXPOSE 8000
-ENTRYPOINT [ "docker/entrypoint.sh" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
