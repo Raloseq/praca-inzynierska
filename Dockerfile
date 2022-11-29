@@ -1,34 +1,85 @@
-FROM php:8.1
+FROM php:8.1-fpm-buster
 
-RUN apt-get update -y && apt-get install -y \
-    nodejs \
-    npm \
-    curl \
-    zip \
-    unzip \
-    && docker-php-ext-install pdo pdo_mysql
+ENV WORKDIR=${WORKDIR:-/var/www}
+ARG NODE_VERSION=18
 
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+    # apt complains this is missing
+    && apt-get install -y apt-utils \
+    && apt-get upgrade -y \
+    && apt-get install -y --no-install-recommends \
+        ghostscript \
+        git \
+        gpg \
+        imagemagick \
+        libc-client-dev \
+        libfreetype6-dev \
+        libjpeg-dev \
+        libkrb5-dev \
+        libltdl* \
+        libmagickwand-dev \
+        libpng-dev \
+        libpq-dev \
+        libx11-dev \
+        libxml2-dev \
+        libzip-dev \
+        openssh-client \
+        postgresql-client \
+        rsync \
+        supervisor \
+        unzip \
+        xfonts-base \
+        xfonts-75dpi \
+        zip \
+    ;
 
-COPY . /var/www/html
-WORKDIR /var/www/html
+# Configure PHP extensions
+RUN docker-php-ext-configure gd --with-jpeg --with-freetype \
+    && docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 
-COPY --from=composer:2.4.2 /usr/bin/composer /usr/bin/composer
+# Install PHP extentions
+RUN docker-php-ext-install \
+    bcmath \
+    gd \
+    imap \
+    opcache \
+    pcntl \
+    pdo_pgsql \
+    zip
 
-COPY docker/entrypoint.sh /entrypoint.sh
+# Install the PECL PHP extensions
+RUN pecl install imagick pcov \
+    && pecl install -o -f redis \
+    && rm -rf /tmp/pear \
+    && docker-php-ext-enable imagick pcov redis
+
+# Add composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Install NodeJS
+RUN curl -sLS https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
+    && apt-get update \
+    && apt-get install -y nodejs \
+    && npm install -g npm
+
+# Install gosu
+RUN set -eux; \
+	apt-get update; \
+	apt-get install -y gosu; \
+    # verify that the binary works
+	gosu nobody true
+
+RUN apt-get -y clean \
+    && apt-get -y autoclean \
+    && apt-get -y purge man \
+    && apt-get -y autoremove \
+    && rm -rf /var/lib/apt/{apt,dpkg,cache,log,lists}/* /tmp/* /var/tmp/* /usr/share/doc/*
+
+COPY ./entrypoint.sh /
 RUN chmod +x /entrypoint.sh
-RUN useradd www -u 1000 -ms /bin/bash
-RUN usermod -aG sudo www
-RUN chown -R www:www /var/www/html
 
-RUN npm init -y
-RUN npm install -g n && n 16.17.0
-RUN npm install
+WORKDIR ${WORKDIR}
 
-USER www
+ENTRYPOINT ["/entrypoint.sh"]
 
-RUN cd public && ln -sf ../storage/app/public/ storage
-
-ENV PORT=8000
-EXPOSE 8000
-ENTRYPOINT [ "/entrypoint.sh" ]
+CMD ["php-fpm"]

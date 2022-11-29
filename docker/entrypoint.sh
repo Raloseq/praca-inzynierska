@@ -1,18 +1,20 @@
-#!/bin/bash
+#!/bin/sh
+set -e
 
-if [ ! -f "vendor/autoload.php"]; then
-    composer install --no-progress --no-interaction
+USER=${USER:-www}
+USER_ID=${USER_ID:-1000}
+
+if [ -z $(id -u $USER 2>/dev/null) ]; then
+    adduser --disabled-password --gecos '' --uid ${USER_ID} ${USER}
+
+    mkdir -p /home/${USER}/.composer
+
+    chown ${USER}:${USER} -R /home/${USER}
+    chown ${USER}:${USER} /mnt
 fi
 
-if [ ! -f ".env" ]; then
-    cp .env.example .env
-fi
+# allow user to write to stdout and stderr
+chown --dereference ${USER} /proc/self/fd/1
+chown --dereference ${USER} /proc/self/fd/2
 
-php artisan key:generate
-php artisan migrate:fresh --seed
-php artisan cache:clear
-php artisan config:clear
-php artisan route:clear
-
-php artisan serve --port=$PORT --host=0.0.0.0
-
+exec gosu ${USER} "$@"
