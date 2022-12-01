@@ -1,6 +1,6 @@
 FROM php:8.1-fpm-buster
 
-ENV WORKDIR=${WORKDIR:-/var/www}
+ENV WORKDIR=${WORKDIR:-/var/www/html}
 ARG NODE_VERSION=18
 
 RUN apt-get update \
@@ -45,7 +45,10 @@ RUN docker-php-ext-install \
     opcache \
     pcntl \
     pdo_pgsql \
-    zip
+    zip \
+    mysqli \
+    pdo \
+    pdo_mysql
 
 # Install the PECL PHP extensions
 RUN pecl install imagick pcov \

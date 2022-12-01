@@ -6,7 +6,6 @@ networks:
 services:
   nginx:
     image: nginx:stable-alpine
-    container_name: ${APP_NAME}-nginx
     ports:
       - "80:80"
     volumes:
@@ -20,7 +19,6 @@ services:
 
   mysql:
     image: mariadb:latest
-    container_name: ${APP_NAME}-db
     restart: unless-stopped
     tty: true
     ports:
@@ -37,7 +35,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: ${APP_NAME}-app
     volumes:
       - .:/var/www/html
     ports:
