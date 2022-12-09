@@ -58,6 +58,6 @@ prepare-release-on-server:
 
   steps:
     - uses: actions/download-artifact@v2
-    with:
-      name: app-build
+      with:
+        name: app-build
 
