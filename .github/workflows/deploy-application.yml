@@ -101,10 +101,10 @@ jobs:
       name: Run before hooks
       env:
           GITHUB_SHA: ${{ github.sha }}
-          RELEASE_PATH: ${{ matrix.server.path }}/release/${{ github.sha }}
-          ACTIVE_RELEASE_PATH: ${{ matrix.server.path }}/current
-          STORAGE_PATH: ${{ matrix.server.path }}/storage
-          BASE_PATH: ${{ matrix.server.path }}
+          RELEASE_PATH: $${ matrix.server.path }}/release/${{ github.sha }}
+          ACTIVE_RELEASE_PATH: $${ matrix.server.path }}/current
+          STORAGE_PATH: $${ matrix.server.path }}/storage
+          BASE_PATH: $${ matrix.server.path }}
       uses: appleboy/ssh-action@master
         with:
           host: ${{ matrix.server.ip }}
