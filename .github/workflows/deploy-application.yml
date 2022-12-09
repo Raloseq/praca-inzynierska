@@ -47,7 +47,7 @@ jobs:
           JSON="${JSON//'%'/'%25'}"
           JSON="${JSON//$'\n'/'%0A'}"
           JSON="${JSON//$'\r'/'%0D'}"
-          echo "::set-output name=deployment-matix::$JSON
+          echo "::set-output name=deployment-matix::$JSON"
 
 prepare-release-on-server:
   runs-on: ubuntu-latest
