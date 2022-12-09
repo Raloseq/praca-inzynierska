@@ -97,7 +97,7 @@ jobs:
     strategy:
       matrix:
         server: ${{ fromJson(needs.create-deployment-artifacts.outputs.deployment-matrix) }}
-    setps:
+    steps:
       name: Run before hooks
       env:
           GITHUB_SHA: ${{ github.sha }}
