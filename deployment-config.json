@@ -5,7 +5,7 @@
         "username": "root",
         "password": "pa$$w0Rd",
         "port": 22,
-        "beforeHooks": "",
+        "beforeHooks": "cd $RELEASE_PATH",
         "afterHooks": "",
         "path": "/var/www/html"
     }
