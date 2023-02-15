@@ -24,6 +24,7 @@ class ClientAddressStoreRequest extends FormRequest
     public function rules()
     {
         return [
+            'client_id' => 'required',
             'voivodeship' => 'string|required',
             'city' => 'string|required',
             'street' => 'string|required',

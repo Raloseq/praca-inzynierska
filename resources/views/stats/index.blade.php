@@ -20,31 +20,6 @@
                 {{ $clients->count() }}
             </td>
         </tr>
-        <tr>
-            <th scope="col" class="py-3 px-6">
-                Pracownik miesiąca
-            </th>
-            <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            @if(is_null($topEmployee))
-                <p>Nie ma jeszcze w tym miesiącu</p>
-            @else
-                {{ $topEmployee->name }} {{ $topEmployee->surname }}
-            @endif
-            </td>
-        </tr>
-        <tr>
-            <th scope="col" class="py-3 px-6">
-                Klient miesiąca
-            </th>
-            <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            @if(is_null($topClient))
-                <p>Nie ma jeszcze w tym miesiącu</p>
-            @else
-            {{ $topClient->name }} {{ $topClient->surname }}
-            @endif
-                    
-            </td>
-        </tr>
     </thead>
 </table>
 </div>

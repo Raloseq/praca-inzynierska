@@ -4,7 +4,7 @@
     @csrf
     <div>
         <x-input-label for="client_id" :value="__('ID Klienta')" />
-        <x-text-input id="client_id" class="block mt-1 w-full" type="text" name="client_id" value="{{ $client_id }}" required autofocus disabled />
+        <x-text-input id="client_id" class="block mt-1 w-full" type="text" name="client_id" value="{{ $client_id }}" required autofocus />
         <x-input-error :messages="$errors->get('client_id')" class="mt-2" />
     </div>
 
@@ -36,7 +36,7 @@
         <a href="{{ url()->previous() }}" class="bg-red-600 inline-block px-5 py-3 ml-5">Anuluj</a>
         <button class="ml-4 bg-green-600 px-5 py-3 mr-10">
             {{ __('Dodaj') }}
-        </button> 
+        </button>
     </div>
 
 </form>

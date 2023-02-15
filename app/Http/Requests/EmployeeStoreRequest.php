@@ -27,7 +27,7 @@ class EmployeeStoreRequest extends FormRequest
         return [
             'name' => 'required|string|max:30|alpha',
             'surname' => 'required|string|max:30|alpha',
-            'phone' => 'required|string|unique:employee|numeric',
+            'phone' => 'required|string|unique:employee|numeric|digits:9',
             'salary' => 'required|min:2000|numeric',
         ];
     }
@@ -45,6 +45,7 @@ class EmployeeStoreRequest extends FormRequest
             'surname.alpha' => 'Nazwisko musi składać się tylko ze znaków',
             'phone.numeric' => 'Telefon powinien zawierać tylko cyfry',
             'phone.required' => 'Podaj numer telefonu',
+            'phone.digits' => 'Numer telefonu musi skladac sie z 9 cyfr',
             'phone.unique' => 'Podany numer już widnieje w bazie',
             'salary.min' => 'Wartość musi być większa niż 2000',
             'salary.numeric' => 'Wartość musi posiadać same cyfry'

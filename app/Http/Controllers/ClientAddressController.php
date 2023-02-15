@@ -27,7 +27,7 @@ class ClientAddressController extends Controller
      */
     public function create()
     {
-        
+
         return view('client_address.create', [
             'client_id' => app('request')->input('client_id')
         ]);
@@ -41,7 +41,6 @@ class ClientAddressController extends Controller
      */
     public function store(ClientAddressStoreRequest $request)
     {
-
         $client_id = $request->client_id;
         $client_address = new ClientAddress($request->validated());
         $client_address ->save();
@@ -87,7 +86,7 @@ class ClientAddressController extends Controller
         $client = Clients::find($clientAddress->client_id);
         $clientAddress->fill($request->validated());
         $clientAddress->save();
-        
+
         return redirect()->route('clients.show',$client)->with('status','Dane adresu klienta zostały zaktualizowane!');
     }
 
