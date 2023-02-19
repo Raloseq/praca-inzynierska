@@ -77,7 +77,7 @@
             </th>
             <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 @if(!is_null($order->damage_photo))
-                    <img src="{{ asset('storage/' . $order->damage_photo) }}" alt="">
+                    <img src="{{ asset($order->damage_photo) }}" alt="">
                 @else
                     <img src="https://via.placeholder.com/150" alt="">
                 @endif

@@ -30,7 +30,7 @@ class ServiceOrdersController extends Controller
         } else {
             $orders = ServiceOrders::where('user_id', Auth::id())->paginate(5);
         }
-        
+
 
         return view('service_orders.index', [
             'orders' => $orders,
@@ -63,8 +63,9 @@ class ServiceOrdersController extends Controller
      */
     public function store(ServiceOrderStoreRequest $request)
     {
+
         $service_order = new ServiceOrders($request->validated());
-        $service_order->damage_photo = $request->file('damage_photo')->store('service_orders');
+        $service_order->damage_photo = $request->file('damage_photo')->store('public');
         $event = OrdersTimetable::create([
             'title' => $request->description,
             'start' => $request->admission_date,
@@ -110,7 +111,7 @@ class ServiceOrdersController extends Controller
         foreach($orders as $order) {
             if($order->end === $serviceOrder->end_date) {
                 $order_calendar = $order;
-            } 
+            }
         }
 
         return view('service_orders.edit', [
@@ -130,7 +131,7 @@ class ServiceOrdersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(ServiceOrderStoreRequest $request, ServiceOrders $serviceOrder)
-    {   
+    {
         Gate::authorize('update', $serviceOrder);
 
         $data = $request->validated();
@@ -144,7 +145,7 @@ class ServiceOrdersController extends Controller
             // $response = $client->sms()->send(
             //     new \Vonage\SMS\Message\SMS("505952848", 'Rafal Brzezinski', 'Twoje zlecenie warsztatowe własnie dobiegło końca możesz odebrać swój samochód. Zlecenie:' . $request->description)
             // );
-            
+
             // $message = $response->current();
 
         } else {
@@ -152,7 +153,7 @@ class ServiceOrdersController extends Controller
         }
 
         if($request->hasFile('damage_photo')) {
-            $serviceOrder->damage_photo = $request->file('damage_photo')->store('service_orders');
+            $serviceOrder->damage_photo = $request->file('damage_photo')->store('public');
         }
 
 
@@ -181,7 +182,7 @@ class ServiceOrdersController extends Controller
 
         $this->deleteOrderTimetable($serviceOrder);
         $serviceOrder->delete();
-        
+
         return redirect()->route('service_orders.index')->with('status','Zlecenie zostało pomyślnie usunięte!');
     }
 
@@ -193,7 +194,7 @@ class ServiceOrdersController extends Controller
         foreach($orders as $order) {
             if($order->end === $serviceOrder->end_date) {
                 $order_calendar = $order;
-            } 
+            }
         }
 
         OrdersTimetable::find($order_calendar->id)->delete();

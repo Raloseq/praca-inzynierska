@@ -17,10 +17,4 @@ fi
 chown --dereference ${USER} /proc/self/fd/1
 chown --dereference ${USER} /proc/self/fd/2
 
-#php artisan key:generate
-#php artisan migrate:fresh --seed
-#php artisan cache:clear
-#php artisan config:clear
-#php artisan route:clear
-
 exec gosu ${USER} "$@"

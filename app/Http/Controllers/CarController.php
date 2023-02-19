@@ -61,7 +61,7 @@ class CarController extends Controller
     public function store(CarStoreRequest $request)
     {
         $car = new Car($request->validated());
-        $car->photo = $request->file('photo')->store('cars');
+        $car->photo = $request->file('photo')->store('public');
         $car->user_id = Auth::id();
         $car->type = $request->type;
         $car->model = $request->model;
@@ -128,7 +128,7 @@ class CarController extends Controller
 
         $car->fill($request->validated());
         if($request->hasFile('photo')) {
-            $car->photo = $request->file('photo')->store('cars');
+            $car->photo = $request->file('photo')->store('public');
         }
         $car->save();
 
